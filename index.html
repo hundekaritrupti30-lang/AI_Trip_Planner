@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Trip Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+
+    <div class="logo">
+        🌍 AI Trip Planner
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#planner">Planner</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#features">Features</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <p class="small-title">✨ SMART TRAVEL PLANNING</p>
+
+        <h1>
+            Plan Your Perfect
+            <span>Dream Trip</span>
+        </h1>
+
+        <p>
+            Create a personalized travel plan with destinations,
+            activities, food, hotels and travel tips.
+        </p>
+
+        <a href="#planner" class="hero-button">
+            Start Planning ✈️
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- PLANNER -->
+<section id="planner" class="planner-section">
+
+    <div class="section-heading">
+        <p>AI TRIP PLANNER</p>
+        <h2>Plan Your Journey</h2>
+        <span>Enter your travel preferences</span>
+    </div>
+
+
+    <div class="planner-card">
+
+        <div class="input-group">
+
+            <label>📍 Destination</label>
+
+            <select id="destination">
+
+                <option value="goa">Goa</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="manali">Manali</option>
+                <option value="jaipur">Jaipur</option>
+                <option value="delhi">Delhi</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>📅 Number of Days</label>
+
+            <input
+                type="number"
+                id="days"
+                min="1"
+                max="7"
+                value="3"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>💰 Budget</label>
+
+            <select id="budget">
+
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>👥 Travel Type</label>
+
+            <select id="travelType">
+
+                <option value="Family">Family</option>
+                <option value="Friends">Friends</option>
+                <option value="Solo">Solo</option>
+                <option value="Couple">Couple</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="input-group full">
+
+            <label>🎯 Your Interest</label>
+
+            <select id="interest">
+
+                <option value="Nature">Nature</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Beach">Beach</option>
+                <option value="Historical">Historical</option>
+                <option value="Shopping">Shopping</option>
+
+            </select>
+
+        </div>
+
+
+        <button class="generate-btn" onclick="generateTrip()">
+            ✨ Generate My Trip
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- RESULT -->
+<section id="resultSection" class="result-section">
+
+    <div id="result"></div>
+
+</section>
+
+
+<!-- DESTINATIONS -->
+<section id="destinations" class="destinations">
+
+    <div class="section-heading">
+
+        <p>EXPLORE INDIA</p>
+
+        <h2>Popular Destinations</h2>
+
+        <span>Choose your next adventure</span>
+
+    </div>
+
+
+    <div class="destination-grid">
+
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=80"
+                alt="Goa"
+            >
+
+            <div class="destination-info">
+
+                <h3>🌴 Goa</h3>
+
+                <p>Beaches, nightlife and beautiful sunsets.</p>
+
+                <button onclick="selectDestination('goa')">
+                    Plan Goa
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=900&q=80"
+                alt="Mumbai"
+            >
+
+            <div class="destination-info">
+
+                <h3>🌆 Mumbai</h3>
+
+                <p>Explore the city, beaches and famous landmarks.</p>
+
+                <button onclick="selectDestination('mumbai')">
+                    Plan Mumbai
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=900&q=80"
+                alt="Manali"
+            >
+
+            <div class="destination-info">
+
+                <h3>🏔️ Manali</h3>
+
+                <p>Mountains, snow and amazing natural scenery.</p>
+
+                <button onclick="selectDestination('manali')">
+                    Plan Manali
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=900&q=80"
+                alt="Jaipur"
+            >
+
+            <div class="destination-info">
+
+                <h3>🏰 Jaipur</h3>
+
+                <p>Royal palaces, forts and rich history.</p>
+
+                <button onclick="selectDestination('jaipur')">
+                    Plan Jaipur
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="destination-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=900&q=80"
+                alt="Delhi"
+            >
+
+            <div class="destination-info">
+
+                <h3>🏛️ Delhi</h3>
+
+                <p>Historic monuments, food and shopping.</p>
+
+                <button onclick="selectDestination('delhi')">
+                    Plan Delhi
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section id="features" class="features">
+
+    <div class="section-heading">
+
+        <p>WHY USE OUR PLANNER?</p>
+
+        <h2>Smart Travel Features</h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div>🗓️</div>
+            <h3>Day-wise Itinerary</h3>
+            <p>Get a simple plan for every day of your trip.</p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>🏨</div>
+            <h3>Hotel Suggestions</h3>
+            <p>Get hotel recommendations according to your budget.</p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>🍴</div>
+            <h3>Food Suggestions</h3>
+            <p>Discover popular local food to try.</p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>🚗</div>
+            <h3>Transport Tips</h3>
+            <p>Get useful transportation suggestions.</p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>💰</div>
+            <h3>Budget Planning</h3>
+            <p>Plan your trip according to your selected budget.</p>
+        </div>
+
+
+        <div class="feature-card">
+            <div>💡</div>
+            <h3>Travel Tips</h3>
+            <p>Get useful tips for a comfortable journey.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h3>🌍 AI Trip Planner</h3>
+
+    <p>
+        Smart • Simple • Personalized Travel Planning
+    </p>
+
+    <p class="copyright">
+        © 2026 AI Trip Planner | College Project
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
