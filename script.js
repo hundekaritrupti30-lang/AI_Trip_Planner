@@ -1,444 +1,280 @@
-const destinations = {
-
-    goa: {
-
-        name: "Goa",
-
-        image:
-        "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1400&q=85",
-
-        places: [
-            "Baga Beach",
-            "Calangute Beach",
-            "Fort Aguada",
-            "Panjim",
-            "Basilica of Bom Jesus",
-            "Candolim Beach"
-        ],
-
-        food:
-        "Goan Fish Curry, Pav Bhaji, Bebinca and local seafood.",
-
-        hotel:
-        "Budget: Beachside guesthouse | Medium: 3-star hotel | High: Premium beach resort",
-
-        transport:
-        "Rent a scooter or use local taxis and buses.",
-
-        tips:
-        "Carry sunscreen, stay hydrated and keep some cash for local places."
-
-    },
-
-
-    mumbai: {
-
-        name: "Mumbai",
-
-        image:
-        "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1400&q=85",
-
-        places: [
-            "Gateway of India",
-            "Marine Drive",
-            "Elephanta Caves",
-            "Colaba",
-            "Juhu Beach",
-            "Siddhivinayak Temple"
-        ],
-
-        food:
-        "Vada Pav, Pav Bhaji, Misal Pav, Bhel Puri and local street food.",
-
-        hotel:
-        "Budget: Hostel | Medium: City hotel | High: Premium hotel",
-
-        transport:
-        "Use local trains, metro, buses and taxis.",
-
-        tips:
-        "Avoid peak traffic hours and keep your belongings safe."
-
-    },
-
-
-    manali: {
-
-        name: "Manali",
-
-        image:
-        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1400&q=85",
-
-        places: [
-            "Solang Valley",
-            "Rohtang Pass",
-            "Hadimba Temple",
-            "Mall Road",
-            "Old Manali",
-            "Vashisht Hot Springs"
-        ],
-
-        food:
-        "Momos, Thukpa, Siddu and traditional Himachali food.",
-
-        hotel:
-        "Budget: Homestay | Medium: Mountain hotel | High: Luxury resort",
-
-        transport:
-        "Use local taxis, buses or rental vehicles.",
-
-        tips:
-        "Carry warm clothes and check weather conditions before travelling."
-
-    },
-
-
-    jaipur: {
-
-        name: "Jaipur",
-
-        image:
-        "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1400&q=85",
-
-        places: [
-            "Amber Fort",
-            "Hawa Mahal",
-            "City Palace",
-            "Jantar Mantar",
-            "Nahargarh Fort",
-            "Jal Mahal"
-        ],
-
-        food:
-        "Dal Baati Churma, Ghewar, Kachori and Rajasthani Thali.",
-
-        hotel:
-        "Budget: Hostel | Medium: Heritage hotel | High: Luxury palace hotel",
-
-        transport:
-        "Use auto-rickshaws, taxis, buses or rental vehicles.",
-
-        tips:
-        "Carry water, wear comfortable shoes and protect yourself from the sun."
-
-    },
-
-
-    delhi: {
-
-        name: "Delhi",
-
-        image:
-        "https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=1400&q=85",
-
-        places: [
-            "India Gate",
-            "Red Fort",
-            "Qutub Minar",
-            "Lotus Temple",
-            "Humayun's Tomb",
-            "Chandni Chowk"
-        ],
-
-        food:
-        "Chole Bhature, Paratha, Chaat, Kebabs and Delhi street food.",
-
-        hotel:
-        "Budget: Hostel | Medium: City hotel | High: Premium hotel",
-
-        transport:
-        "Delhi Metro is a convenient option along with taxis and buses.",
-
-        tips:
-        "Use the metro for major attractions and avoid heavy traffic hours."
-
-    }
-
-};
-
-
-function selectDestination(place) {
-
-    document.getElementById("destination").value = place;
-
-    document.getElementById("planner").scrollIntoView({
-        behavior: "smooth"
-    });
-
-}
-
-
 function generateTrip() {
 
-    const destination =
-        document.getElementById("destination").value;
+    let destination =
+        document.getElementById("destination").value.trim();
 
-    const days =
+    let days =
         parseInt(document.getElementById("days").value);
 
-    const budget =
+    let budget =
         document.getElementById("budget").value;
 
-    const travelType =
+    let travelType =
         document.getElementById("travelType").value;
 
-    const interest =
+    let transport =
+        document.getElementById("transport").value;
+
+    let interest =
         document.getElementById("interest").value;
 
-
-    if (days < 1 || days > 7) {
-
-        alert("Please select between 1 and 7 days.");
-
+    if (destination === "") {
+        alert("Please enter destination!");
         return;
-
     }
 
+    if (days < 1 || days > 15) {
+        alert("Please select 1 to 15 days.");
+        return;
+    }
 
-    const trip = destinations[destination];
-
-
-    let itineraryHTML = "";
-
+    let dailyPlan = "";
 
     for (let i = 1; i <= days; i++) {
 
-        const place1 =
-            trip.places[(i - 1) % trip.places.length];
+        dailyPlan += `
+        <div class="day">
 
-        const place2 =
-            trip.places[i % trip.places.length];
+            <h3>📅 Day ${i}</h3>
 
-        const place3 =
-            trip.places[(i + 1) % trip.places.length];
+            <p>🌅 Morning: Explore ${destination}</p>
 
+            <p>📍 Activity: ${interest} activities</p>
 
-        itineraryHTML += `
+            <p>🍴 Afternoon: Try local food</p>
 
-            <div class="day-card">
+            <p>🌆 Evening: Sightseeing and relaxation</p>
 
-                <h3>📅 Day ${i}</h3>
-
-                <p>
-                    🌅 Start your day with
-                    <strong>${place1}</strong>.
-                </p>
-
-                <p>
-                    📍 Explore
-                    <strong>${place2}</strong>
-                    and enjoy ${interest.toLowerCase()} activities.
-                </p>
-
-                <p>
-                    🌆 Evening visit to
-                    <strong>${place3}</strong>.
-                </p>
-
-            </div>
-
+        </div>
         `;
-
     }
 
+    let dailyCost;
 
-    const resultHTML = `
+    if (budget === "Low") {
+        dailyCost = 1500;
+    }
+    else if (budget === "Medium") {
+        dailyCost = 3000;
+    }
+    else {
+        dailyCost = 6000;
+    }
 
-        <div class="trip-result">
+    let total = dailyCost * days;
 
-            <div
-                class="trip-cover"
-                style="background-image:
-                linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.5)),
-                url('${trip.image}')"
-            >
+    document.getElementById("result").innerHTML = `
 
-                <div>
+    <div class="trip-result">
 
-                    <h2>
-                        ✨ ${trip.name} Trip
-                    </h2>
+        <h2>🤖 AI Trip Plan for ${destination}</h2>
 
-                    <p>
-                        Your personalized travel plan
-                    </p>
+        <p><b>📅 Duration:</b> ${days} Days</p>
 
-                </div>
+        <p><b>💰 Budget:</b> ${budget}</p>
 
+        <p><b>👥 Travel Type:</b> ${travelType}</p>
+
+        <p><b>🚆 Transport:</b> ${transport}</p>
+
+        <p><b>🎯 Interest:</b> ${interest}</p>
+
+        <hr><br>
+
+        <h2>🗓️ Day-by-Day Itinerary</h2>
+
+        ${dailyPlan}
+
+        <div class="details">
+
+            <div class="detail">
+                <h3>🏨 Hotel</h3>
+                <p>${budget} budget hotel recommended.</p>
             </div>
 
+            <div class="detail">
+                <h3>🍴 Food</h3>
+                <p>Try famous local dishes of ${destination}.</p>
+            </div>
 
-            <div class="trip-info">
+            <div class="detail">
+                <h3>💰 Budget</h3>
+                <p>Estimated Cost: ₹${total}</p>
+            </div>
 
+            <div class="detail">
+                <h3>🎒 Packing</h3>
+                <p>
+                👕 Clothes<br>
+                🔋 Charger<br>
+                🧴 Personal items<br>
+                🪪 ID Proof<br>
+                💧 Water Bottle
+                </p>
+            </div>
 
-                <div class="info-row">
+            <div class="detail">
+                <h3>🌦️ Weather Tip</h3>
+                <p>Check the local weather before travelling.</p>
+            </div>
 
-                    <div class="info-box">
-                        📍 ${trip.name}
-                    </div>
+            <div class="detail">
+                <h3>🌱 Eco Travel</h3>
+                <p>Use public transport and avoid unnecessary plastic.</p>
+            </div>
 
-                    <div class="info-box">
-                        📅 ${days} Days
-                    </div>
+            <div class="detail">
+                <h3>🆘 Emergency</h3>
+                <p>Keep important documents and emergency contacts.</p>
+            </div>
 
-                    <div class="info-box">
-                        💰 ${budget} Budget
-                    </div>
+            <div class="detail">
+                <h3>❤️ Favorite</h3>
+                <button onclick="saveFavorite('${destination}')">
+                    Save Destination
+                </button>
+            </div>
 
-                    <div class="info-box">
-                        👥 ${travelType}
-                    </div>
-
-                    <div class="info-box">
-                        🎯 ${interest}
-                    </div>
-
-                </div>
-
-
-                <h2>
-                    🗓️ Suggested Itinerary
-                </h2>
-
-                <br>
-
-
-                <div class="itinerary">
-
-                    ${itineraryHTML}
-
-                </div>
-
-
-                <div class="extra-grid">
-
-
-                    <div class="extra-card">
-
-                        <h3>🏨 Hotel</h3>
-
-                        <p>
-                            ${trip.hotel}
-                        </p>
-
-                    </div>
-
-
-                    <div class="extra-card">
-
-                        <h3>🍴 Food</h3>
-
-                        <p>
-                            ${trip.food}
-                        </p>
-
-                    </div>
-
-
-                    <div class="extra-card">
-
-                        <h3>🚗 Transport</h3>
-
-                        <p>
-                            ${trip.transport}
-                        </p>
-
-                    </div>
-
-
-                    <div class="extra-card">
-
-                        <h3>💡 Travel Tips</h3>
-
-                        <p>
-                            ${trip.tips}
-                        </p>
-
-                    </div>
-
-
-                    <div class="extra-card">
-
-                        <h3>📸 Photography</h3>
-
-                        <p>
-                            Visit popular viewpoints and
-                            capture memorable photos.
-                        </p>
-
-                    </div>
-
-
-                    <div class="extra-card">
-
-                        <h3>🎒 Packing</h3>
-
-                        <p>
-                            Carry comfortable clothes,
-                            shoes, ID and essential items.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="trip-buttons">
-
-                    <button
-                        class="print-btn"
-                        onclick="window.print()"
-                    >
-                        🖨️ Print Trip
-                    </button>
-
-
-                    <button
-                        class="reset-btn"
-                        onclick="newTrip()"
-                    >
-                        🔄 Plan New Trip
-                    </button>
-
-                </div>
-
-
+            <div class="detail">
+                <h3>📤 Share</h3>
+                <button onclick="shareTrip()">
+                    Share Trip
+                </button>
             </div>
 
         </div>
 
+        <br>
+
+        <button onclick="window.print()">
+            🖨️ Print / Save Trip
+        </button>
+
+    </div>
     `;
+}
 
 
-    const result =
-        document.getElementById("result");
+/* DARK MODE */
 
+function toggleTheme() {
 
-    result.innerHTML = resultHTML;
-
-
-    const resultSection =
-        document.getElementById("resultSection");
-
-
-    resultSection.style.display = "block";
-
-
-    resultSection.scrollIntoView({
-        behavior: "smooth"
-    });
+    document.body.classList.toggle("dark");
 
 }
 
 
-function newTrip() {
+/* FAVORITE */
 
-    document.getElementById("result").innerHTML = "";
+function saveFavorite(place) {
 
-    document.getElementById("resultSection").style.display = "none";
+    localStorage.setItem("favoriteDestination", place);
 
-    document.getElementById("planner").scrollIntoView({
-        behavior: "smooth"
-    });
+    alert(place + " saved to Favorites ❤️");
+
+}
+
+
+/* SHARE */
+
+function shareTrip() {
+
+    if (navigator.share) {
+
+        navigator.share({
+            title: "My AI Trip Plan",
+            text: "Check my AI Trip Planner!"
+        });
+
+    }
+    else {
+
+        alert("Trip sharing is not supported on this browser.");
+
+    }
+
+}
+
+
+/* AI TRAVEL ASSISTANT */
+
+function askAI() {
+
+    let question =
+        document.getElementById("question").value.toLowerCase();
+
+    let answer =
+        document.getElementById("answer");
+
+    if (question === "") {
+
+        answer.innerHTML =
+            "Please ask a travel question.";
+
+        return;
+    }
+
+    if (question.includes("food")) {
+
+        answer.innerHTML =
+            "🍴 Try local traditional food, popular restaurants and street food.";
+
+    }
+
+    else if (question.includes("hotel")) {
+
+        answer.innerHTML =
+            "🏨 Choose a hotel according to your budget and location.";
+
+    }
+
+    else if (question.includes("packing")) {
+
+        answer.innerHTML =
+            "🎒 Carry clothes, ID proof, charger, medicines, water bottle and personal items.";
+
+    }
+
+    else if (question.includes("weather")) {
+
+        answer.innerHTML =
+            "🌦️ Check the destination weather before starting your journey.";
+
+    }
+
+    else if (question.includes("place") ||
+             question.includes("visit")) {
+
+        answer.innerHTML =
+            "📍 Visit famous tourist attractions, historical places and natural locations.";
+
+    }
+
+    else {
+
+        answer.innerHTML =
+            "🤖 AI Suggestion: Plan your trip according to your budget, available days, interests and travel type.";
+
+    }
+
+}
+
+
+/* FEEDBACK */
+
+function sendFeedback() {
+
+    let feedback =
+        document.getElementById("feedback").value;
+
+    if (feedback === "") {
+
+        alert("Please enter your feedback.");
+
+        return;
+    }
+
+    document.getElementById("feedbackMessage").innerHTML =
+        "✅ Thank you for your feedback!";
 
 }
