@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trip Planner | Smart Travel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">✈️ AI Trip Planner</div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#planner">Plan Trip</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </div>
+
+        <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <div class="badge">🤖 SMART AI TRAVEL PLANNER</div>
+
+        <h1>Plan Your Perfect<br>
+            <span>Dream Trip</span>
+        </h1>
+
+        <p>
+            Create a personalized travel plan with destinations,
+            activities, budget, food, hotels and much more.
+        </p>
+
+        <a href="#planner" class="hero-btn">🚀 Start Planning</a>
+    </div>
+</section>
+
+
+<section id="planner" class="planner-section">
+
+    <div class="section-title">
+        <p>TRAVEL PLANNER</p>
+        <h2>Create Your Trip</h2>
+        <span>Enter your travel preferences below.</span>
+    </div>
+
+    <div class="planner-box">
+
+        <div class="input-group">
+            <label>📍 Destination</label>
+            <input type="text" id="destination"
+                   placeholder="Example: Goa, Mumbai, Manali">
+        </div>
+
+        <div class="input-group">
+            <label>📅 Number of Days</label>
+            <input type="number" id="days"
+                   min="1" max="15" value="3">
+        </div>
+
+        <div class="input-group">
+            <label>👥 Travellers</label>
+            <input type="number" id="travellers"
+                   min="1" max="30" value="2">
+        </div>
+
+        <div class="input-group">
+            <label>💰 Budget Per Person / Day</label>
+
+            <select id="budget">
+                <option value="low">₹1,000 - Budget</option>
+                <option value="medium" selected>₹2,500 - Medium</option>
+                <option value="high">₹5,000 - Luxury</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>🧑‍🤝‍🧑 Trip Type</label>
+
+            <select id="tripType">
+                <option>👨‍👩‍👧 Family</option>
+                <option>❤️ Couple</option>
+                <option>👭 Friends</option>
+                <option>🎒 Solo</option>
+                <option>💼 Business</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>🚗 Transport</label>
+
+            <select id="transport">
+                <option>🚆 Train</option>
+                <option>✈️ Flight</option>
+                <option>🚌 Bus</option>
+                <option>🚗 Car</option>
+                <option>🚕 Taxi</option>
+            </select>
+        </div>
+
+        <div class="input-group full-width">
+            <label>❤️ Your Interests</label>
+
+            <div class="interest-box">
+
+                <label>
+                    <input type="checkbox" value="Adventure">
+                    🏔️ Adventure
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Beach">
+                    🏖️ Beach
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Nature">
+                    🌳 Nature
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Culture">
+                    🏛️ Culture
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Food">
+                    🍴 Food
+                </label>
+
+                <label>
+                    <input type="checkbox" value="Shopping">
+                    🛍️ Shopping
+                </label>
+
+            </div>
+        </div>
+
+        <button class="generate-btn" onclick="generateTrip()">
+            ✨ Generate My AI Trip
+        </button>
+
+        <button class="reset-btn" onclick="resetPlanner()">
+            🔄 Reset
+        </button>
+
+    </div>
+</section>
+
+
+<section id="result" class="result-section">
+
+    <div class="section-title">
+        <p>YOUR PERSONALIZED PLAN</p>
+        <h2>✨ AI Generated Trip</h2>
+    </div>
+
+    <div id="tripOutput"></div>
+
+    <div class="result-buttons">
+
+        <button onclick="window.print()">
+            🖨️ Print / Save PDF
+        </button>
+
+        <button onclick="copyTrip()">
+            📋 Copy Trip
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="features" class="features-section">
+
+    <div class="section-title">
+        <p>SMART FEATURES</p>
+        <h2>Everything You Need</h2>
+    </div>
+
+    <div class="features">
+
+        <div class="feature-card">
+            <div>🤖</div>
+            <h3>AI Itinerary</h3>
+            <p>Get a personalized day-wise travel plan.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>💰</div>
+            <h3>Budget Calculator</h3>
+            <p>Calculate approximate total trip expenses.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>🏨</div>
+            <h3>Hotel Suggestions</h3>
+            <p>Get hotel ideas according to your budget.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>🍴</div>
+            <h3>Food Guide</h3>
+            <p>Discover popular local food.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>🚗</div>
+            <h3>Transport</h3>
+            <p>Choose your preferred travel option.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>🎒</div>
+            <h3>Packing List</h3>
+            <p>Get a useful travel packing checklist.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>🌦️</div>
+            <h3>Travel Tips</h3>
+            <p>Useful tips before and during your trip.</p>
+        </div>
+
+        <div class="feature-card">
+            <div>📥</div>
+            <h3>Print Trip</h3>
+            <p>Print or save your complete trip plan.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="about" class="about-section">
+
+    <div class="about-content">
+
+        <div>
+            <p class="small-title">ABOUT PROJECT</p>
+
+            <h2>Travel Planning Made Easy</h2>
+
+            <p>
+                AI Trip Planner is a smart travel planning website
+                that helps users create personalized travel plans
+                according to their destination, budget, interests
+                and travel preferences.
+            </p>
+
+            <p>
+                It provides itinerary planning, budget estimation,
+                food suggestions, hotel ideas, transport options,
+                packing lists and travel tips.
+            </p>
+        </div>
+
+        <div class="about-card">
+
+            <div class="big-plane">✈️</div>
+
+            <h3>AI Trip Planner</h3>
+
+            <p>Plan • Explore • Travel • Enjoy</p>
+
+            <div class="stats">
+
+                <div>
+                    <strong>24/7</strong>
+                    <span>Planning</span>
+                </div>
+
+                <div>
+                    <strong>AI</strong>
+                    <span>Smart</span>
+                </div>
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Easy</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>✈️ AI Trip Planner</h3>
+
+    <p>
+        Travel smarter. Explore more. Create memories.
+    </p>
+
+    <p>
+        © 2026 AI Trip Planner | College Project
+    </p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
