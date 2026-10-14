@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Trip Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#home">🌍 AI Trip Planner</a>
+  <button id="menuBtn" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+  <nav id="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#planner">Trip Planner</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <p class="tag">✈️ YOUR SMART TRAVEL COMPANION</p>
+    <h1>Explore The World With <span>AI Trip Planner</span></h1>
+    <p>Discover beautiful places, plan your journey and create unforgettable memories.</p>
+    <a href="#planner" class="btn">Plan My Trip ✈️</a>
+    <a href="#destinations" class="btn secondary">Explore Places</a>
+    <div class="stats">
+      <div><b>50+</b><br>Destinations</div>
+      <div><b>Easy</b><br>Trip Planning</div>
+      <div><b>24/7</b><br>Access</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-title">
+    <p>ABOUT OUR PROJECT</p>
+    <h2>Travel Planning Made Simple</h2>
+  </div>
+  <div class="about-layout">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80" alt="Beautiful mountains">
+    <div>
+      <h3>Welcome to AI Trip Planner!</h3>
+      <p>AI Trip Planner is a travel website that helps users discover destinations and organize trips easily.</p>
+      <p>Enter your destination, budget, trip duration and travel type to get a suggested itinerary.</p>
+      <p>✅ Simple design</p>
+      <p>✅ Budget estimation</p>
+      <p>✅ Travel suggestions</p>
+      <p>✅ Beautiful destination photos</p>
+      <a href="#planner" class="btn">Start Planning</a>
+    </div>
+  </div>
+</section>
+
+<section class="section colored" id="features">
+  <div class="section-title">
+    <p>TRAVEL SMARTER</p>
+    <h2>Amazing Features</h2>
+  </div>
+  <div class="grid">
+    <article class="feature"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>Smart Planning</h3><p>Create a suggested travel itinerary.</p></article>
+    <article class="feature"><i class="fa-solid fa-wallet"></i><h3>Budget Planner</h3><p>Estimate your trip expenses.</p></article>
+    <article class="feature"><i class="fa-solid fa-map"></i><h3>Explore Places</h3><p>Discover interesting destinations.</p></article>
+    <article class="feature"><i class="fa-solid fa-calendar-days"></i><h3>Daily Schedule</h3><p>Organize activities day by day.</p></article>
+    <article class="feature"><i class="fa-solid fa-camera"></i><h3>Photo Gallery</h3><p>Explore beautiful travel pictures.</p></article>
+    <article class="feature"><i class="fa-solid fa-lightbulb"></i><h3>Travel Tips</h3><p>Read useful travel suggestions.</p></article>
+  </div>
+</section>
+
+<section class="section" id="destinations">
+  <div class="section-title">
+    <p>FIND YOUR NEXT ADVENTURE</p>
+    <h2>Popular Destinations</h2>
+    <input id="searchPlace" class="search" placeholder="🔍 Search destinations...">
+  </div>
+  <div class="filters">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="beach">Beaches</button>
+    <button class="filter" data-filter="mountain">Mountains</button>
+    <button class="filter" data-filter="city">Cities</button>
+    <button class="filter" data-filter="nature">Nature</button>
+  </div>
+
+  <div class="grid destination-grid">
+    <article class="place" data-category="beach">
+      <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=700&q=80" alt="Goa beach" loading="lazy">
+      <div class="place-info"><h3>Goa, India</h3><p>🏖️ Beaches and sunsets</p><button class="btn choose" data-place="Goa">Plan Trip</button></div>
+    </article>
+    <article class="place" data-category="mountain">
+      <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=700&q=80" alt="Manali mountains" loading="lazy">
+      <div class="place-info"><h3>Manali, India</h3><p>🏔️ Mountain adventures</p><button class="btn choose" data-place="Manali">Plan Trip</button></div>
+    </article>
+    <article class="place" data-category="nature">
+      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=80" alt="Bali island" loading="lazy">
+      <div class="place-info"><h3>Bali, Indonesia</h3><p>🌴 Tropical beauty</p><button class="btn choose" data-place="Bali">Plan Trip</button></div>
+    </article>
+    <article class="place" data-category="city">
+      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80" alt="Paris" loading="lazy">
+      <div class="place-info"><h3>Paris, France</h3><p>🗼 Art and architecture</p><button class="btn choose" data-place="Paris">Plan Trip</button></div>
+    </article>
+    <article class="place" data-category="mountain">
+      <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=700&q=80" alt="Switzerland" loading="lazy">
+      <div class="place-info"><h3>Switzerland</h3><p>❄️ Lakes and mountains</p><button class="btn choose" data-place="Switzerland">Plan Trip</button></div>
+    </article>
+    <article class="place" data-category="city">
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=80" alt="Dubai" loading="lazy">
+      <div class="place-info"><h3>Dubai, UAE</h3><p>🌆 Modern city life</p><button class="btn choose" data-place="Dubai">Plan Trip</button></div>
+    </article>
+  </div>
+</section>
+
+<section class="section colored" id="planner">
+  <div class="section-title">
+    <p>YOUR JOURNEY STARTS HERE</p>
+    <h2>Plan Your Dream Trip ✈️</h2>
+    <p>Fill in your travel details to create a sample itinerary.</p>
+  </div>
+  <div class="planner-layout">
+    <form id="tripForm">
+      <label for="destination">Destination</label>
+      <input id="destination" placeholder="Enter destination" required>
+
+      <label for="tripType">Travel Type</label>
+      <select id="tripType">
+        <option>Adventure</option><option>Family</option>
+        <option>Relaxation</option><option>Nature</option><option>Culture</option>
+      </select>
+
+      <label for="duration">Duration</label>
+      <select id="duration">
+        <option value="1">1 Day</option><option value="2">2 Days</option>
+        <option value="3" selected>3 Days</option><option value="5">5 Days</option>
+        <option value="7">7 Days</option>
+      </select>
+
+      <label for="budget">Budget per person (₹)</label>
+      <input id="budget" type="number" min="500" placeholder="e.g. 10000" required>
+
+      <label for="travelers">Number of travelers</label>
+      <input id="travelers" type="number" min="1" max="50" value="1" required>
+
+      <button type="submit" class="btn full">✨ Generate My Trip</button>
+    </form>
+    <div class="planner-image">
+      <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80" alt="Travel planning" loading="lazy">
+      <h3>Your Adventure, Your Way!</h3>
+      <p>Plan smart, travel happily and collect memories.</p>
+    </div>
+  </div>
+  <div id="tripResult" aria-live="polite"></div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="section-title">
+    <p>BEAUTIFUL PLACES</p>
+    <h2>Travel Photo Gallery 📸</h2>
+  </div>
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=700&q=80" alt="Lake" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=700&q=80" alt="Mountain lake" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=700&q=80" alt="Coastal village" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=700&q=80" alt="Nature view" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?auto=format&fit=crop&w=700&q=80" alt="Green mountains" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Beautiful landscape" loading="lazy">
+  </div>
+</section>
+
+<section class="section contact colored" id="contact">
+  <div class="section-title">
+    <p>WE WOULD LOVE TO HEAR FROM YOU</p>
+    <h2>Contact Us 📩</h2>
+  </div>
+  <form id="contactForm" class="contact-form">
+    <label for="name">Your Name</label>
+    <input id="name" placeholder="Enter your name" required>
+    <label for="email">Email Address</label>
+    <input id="email" type="email" placeholder="Enter your email" required>
+    <label for="message">Message</label>
+    <textarea id="message" placeholder="Write your message" required></textarea>
+    <button class="btn full" type="submit">Send Message</button>
+    <p id="contactResult" aria-live="polite"></p>
+  </form>
+</section>
+
+</main>
+
+<footer>
+  <h3>🌍 AI Trip Planner</h3>
+  <p>Plan • Explore • Discover</p>
+  <div class="social">
+    <a href="#home" aria-label="Home"><i class="fa-solid fa-house"></i></a>
+    <a href="#contact" aria-label="Contact"><i class="fa-solid fa-envelope"></i></a>
+    <a href="#gallery" aria-label="Gallery"><i class="fa-solid fa-camera"></i></a>
+  </div>
+  <p>© 2026 AI Trip Planner | College Project</p>
+  <a href="#home">Back to Top ↑</a>
+</footer>
+
+<button id="topBtn" aria-label="Back to top">↑</button>
+<script src="script.js"></script>
+</body>
+</html>
