@@ -1,291 +1,298 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#6750e8">
-  <title>AI Trip Planner | Explore the World</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>WanderWise - AI Trip Planner</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="header">
-  <a class="logo" href="#home">✈️ AI Trip Planner</a>
-  <button id="menuToggle" class="menu-toggle" aria-label="Open menu">☰</button>
-  <nav id="navbar">
-    <a href="#home">Home</a>
-    <a href="#hotels">Hotels</a>
-    <a href="#packing">Packing</a>
-    <a href="#food">Food</a>
-    <a href="#mytrips">My Trips</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#budget">Budget</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#weather">Weather</a>
-    <a href="#transport">Transport</a>
-    <button id="themeToggle" class="theme-btn" aria-label="Toggle dark mode">🌙</button>
+  <a href="#home" class="logo">🌿 WanderWise</a>
+
+  <nav class="nav">
+    <a href="#home" data-en="Home" data-mr="मुख्यपृष्ठ" data-hi="होम">Home</a>
+    <a href="#planner" data-en="Plan Trip" data-mr="ट्रिप प्लॅन" data-hi="ट्रिप प्लान">Plan Trip</a>
+    <a href="#itinerary" data-en="Day-wise Plan" data-mr="दिवसानुसार प्लॅन" data-hi="दिन के अनुसार प्लान">Day-wise Plan</a>
+    <a href="#destinations" data-en="Places" data-mr="ठिकाणे" data-hi="जगहें">Places</a>
+    <a href="#maps" data-en="Maps" data-mr="नकाशा" data-hi="नक्शा">Maps</a>
+    <a href="#budget" data-en="Budget" data-mr="बजेट" data-hi="बजट">Budget</a>
+    <a href="#tools" data-en="More Features" data-mr="अधिक फीचर्स" data-hi="अन्य सुविधाएँ">More Features</a>
   </nav>
+
+  <div class="header-tools">
+    <select id="languageSelect" aria-label="Choose language">
+      <option value="en">English</option>
+      <option value="mr">मराठी</option>
+      <option value="hi">हिन्दी</option>
+    </select>
+    <button id="darkToggle" class="small-btn" type="button">🌙</button>
+  </div>
 </header>
 
 <main>
-<section class="hero" id="home">
-  <div class="hero-content">
-    <span class="tag">🌍 YOUR NEXT ADVENTURE STARTS HERE</span>
-    <h1>Explore The World<br>With <span>AI Trip Planner</span></h1>
-    <p>Discover beautiful destinations, organise your journey, manage your budget and make every trip memorable.</p>
-    <div class="hero-actions">
-      <a class="btn" href="#mytrips">Plan My Trip ✨</a>
-      <a class="btn outline" href="#gallery">Explore Gallery 📸</a>
+  <!-- PAGE 1: HOME -->
+  <section id="home" class="hero page">
+    <div class="hero-content">
+      <span class="tag">✈ EXPLORE • DREAM • DISCOVER</span>
+      <h1 data-en="Your Journey, Your Story" data-mr="तुमचा प्रवास, तुमची गोष्ट" data-hi="आपकी यात्रा, आपकी कहानी">Your Journey, Your Story</h1>
+      <p data-en="Discover beautiful places and plan your perfect trip, day by day."
+         data-mr="सुंदर ठिकाणे शोधा आणि प्रत्येक दिवसाचा प्रवास प्लॅन करा."
+         data-hi="सुंदर जगहें खोजें और हर दिन की यात्रा की योजना बनाएँ.">
+         Discover beautiful places and plan your perfect trip, day by day.
+      </p>
+      <a class="btn" href="#planner" data-en="Plan My Trip →" data-mr="ट्रिप प्लॅन करा →" data-hi="ट्रिप प्लान करें →">Plan My Trip →</a>
     </div>
-    <div class="stats">
-      <div><strong>9+</strong><small>Extra Sections</small></div>
-      <div><strong>24/7</strong><small>Website Access</small></div>
-      <div><strong>100%</strong><small>Trip Organisation</small></div>
+  </section>
+
+  <section class="section intro">
+    <p class="eyebrow">YOUR NEXT ADVENTURE</p>
+    <h2>Travel more. Worry less.</h2>
+    <p>Explore destinations, arrange daily sightseeing, track your expenses and keep all your trip details in one place.</p>
+    <div class="shayari-grid">
+      <article class="shayari">
+        <span>🌿</span>
+        <p>"Let the mountains whisper, and let your soul wander."</p>
+      </article>
+      <article class="shayari">
+        <span>🌅</span>
+        <p>"Every sunrise brings a new road and a new story."</p>
+      </article>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="hotels">
-  <div class="heading">
-    <span class="tag">STAY COMFORTABLY</span>
-    <h2>🏨 Hotels & Stay</h2>
-    <p>Explore sample accommodation styles for your next trip.</p>
-  </div>
-  <div class="grid three">
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Luxury hotel pool">
-      <div class="card-body"><span class="pill">Luxury</span><h3>Luxury Resort</h3><p>Comfortable rooms, beautiful views and relaxing facilities.</p><button class="btn small" data-hotel="Luxury Resort">Add to My Trip</button></div>
-    </article>
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80" alt="Modern hotel bedroom">
-      <div class="card-body"><span class="pill">Comfort</span><h3>City Hotel</h3><p>A convenient stay for sightseeing and city exploration.</p><button class="btn small" data-hotel="City Hotel">Add to My Trip</button></div>
-    </article>
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=800&q=80" alt="Cozy mountain accommodation">
-      <div class="card-body"><span class="pill">Nature</span><h3>Nature Homestay</h3><p>A peaceful stay surrounded by beautiful landscapes.</p><button class="btn small" data-hotel="Nature Homestay">Add to My Trip</button></div>
-    </article>
-  </div>
-  <p class="note">These are sample stay ideas, not live hotel listings or reservations.</p>
-</section>
+  <!-- PAGE 2: TRIP PLANNER -->
+  <section id="planner" class="section page">
+    <p class="eyebrow">START YOUR JOURNEY</p>
+    <h2 data-en="Plan Your Trip" data-mr="तुमची ट्रिप प्लॅन करा" data-hi="अपनी ट्रिप प्लान करें">Plan Your Trip</h2>
 
-<section class="section tinted" id="packing">
-  <div class="heading">
-    <span class="tag">BE READY TO GO</span>
-    <h2>🎒 Packing Checklist</h2>
-    <p>Tick the things you have packed. Your progress is saved in this browser.</p>
-  </div>
-  <div class="panel narrow">
-    <div class="progress-info"><strong id="packingProgress">0 of 12 packed</strong><button id="resetPacking" class="text-btn">Reset checklist</button></div>
-    <div class="progress-track"><div id="packingBar"></div></div>
-    <div id="packingList" class="packing-list"></div>
-    <form id="addPackingForm" class="inline-form">
-      <input id="customPacking" placeholder="Add another item..." maxlength="80" required>
-      <button class="btn" type="submit">+ Add</button>
+    <form id="tripForm" class="panel form-grid">
+      <label>
+        Destination
+        <input id="destinationInput" list="destinationList" placeholder="e.g. Manali" required>
+        <datalist id="destinationList">
+          <option value="Manali"><option value="Goa"><option value="Jaipur">
+          <option value="Mumbai"><option value="Pune"><option value="Mahabaleshwar">
+          <option value="Kerala"><option value="Shimla"><option value="Rishikesh">
+          <option value="Agra"><option value="Lonavala"><option value="Nashik">
+        </datalist>
+      </label>
+
+      <label>
+        Start Date
+        <input type="date" id="startDate" required>
+      </label>
+
+      <label>
+        Number of Days
+        <select id="daysInput">
+          <option value="1">1 Day</option>
+          <option value="2">2 Days</option>
+          <option value="3" selected>3 Days</option>
+          <option value="4">4 Days</option>
+          <option value="5">5 Days</option>
+          <option value="6">6 Days</option>
+          <option value="7">7 Days</option>
+        </select>
+      </label>
+
+      <label>
+        Number of Travellers
+        <input type="number" id="travellersInput" min="1" max="100" value="2" required>
+      </label>
+
+      <label>
+        Travel Style
+        <select id="travelStyle">
+          <option value="Nature">Nature & Mountains</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Culture">History & Culture</option>
+          <option value="Relax">Relaxing Holiday</option>
+          <option value="Family">Family Trip</option>
+        </select>
+      </label>
+
+      <label>
+        Budget per Person (₹)
+        <input type="number" id="budgetInput" min="0" value="10000" required>
+      </label>
+
+      <button class="btn full" type="submit">✨ Generate Day-wise Trip</button>
     </form>
-  </div>
-</section>
+    <p class="hint">Note: This planner generates a sample itinerary using built-in destination suggestions. Check local timings and availability before travelling.</p>
+  </section>
 
-<section class="section" id="food">
-  <div class="heading">
-    <span class="tag">TASTE THE JOURNEY</span>
-    <h2>🍽️ Food & Restaurants</h2>
-    <p>Discover different food styles while travelling.</p>
-  </div>
-  <div class="filter-row">
-    <input id="foodSearch" placeholder="Search food..." aria-label="Search food">
-    <select id="foodFilter" aria-label="Filter food">
-      <option value="all">All Cuisines</option>
-      <option value="Indian">Indian</option>
-      <option value="Street Food">Street Food</option>
-      <option value="International">International</option>
-    </select>
-  </div>
-  <div id="foodGrid" class="grid three">
-    <article class="card food-card" data-name="Indian Thali" data-type="Indian">
-      <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80" alt="Indian thali meal">
-      <div class="card-body"><span class="pill">Indian</span><h3>Indian Thali</h3><p>A selection of regional dishes in one meal.</p><button class="text-btn" data-food="Indian Thali">＋ Add to food list</button></div>
-    </article>
-    <article class="card food-card" data-name="Street Food" data-type="Street Food">
-      <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80" alt="Indian street snacks">
-      <div class="card-body"><span class="pill">Street Food</span><h3>Local Street Food</h3><p>Explore popular local snacks and flavours.</p><button class="text-btn" data-food="Local Street Food">＋ Add to food list</button></div>
-    </article>
-    <article class="card food-card" data-name="Italian Pizza" data-type="International">
-      <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Fresh pizza">
-      <div class="card-body"><span class="pill">International</span><h3>Italian Pizza</h3><p>Enjoy a popular international favourite.</p><button class="text-btn" data-food="Italian Pizza">＋ Add to food list</button></div>
-    </article>
-  </div>
-  <div class="panel list-panel"><h3>📝 My Food List</h3><ul id="myFoodList"><li>No food items added yet.</li></ul></div>
-</section>
-
-<section class="section tinted" id="mytrips">
-  <div class="heading">
-    <span class="tag">YOUR TRAVEL DIARY</span>
-    <h2>📍 My Trips</h2>
-    <p>Create a trip and keep it saved in your browser.</p>
-  </div>
-  <form id="tripForm" class="panel form-panel">
-    <div class="form-grid">
-      <div><label for="tripDestination">Destination</label><input id="tripDestination" placeholder="e.g. Goa, Manali, Paris" required maxlength="100"></div>
-      <div><label for="tripDate">Departure Date</label><input id="tripDate" type="date" required></div>
-      <div><label for="tripDays">Number of Days</label><input id="tripDays" type="number" min="1" max="60" value="3" required></div>
-      <div><label for="tripPeople">Travellers</label><input id="tripPeople" type="number" min="1" max="50" value="2" required></div>
-      <div><label for="tripBudget">Total Budget (₹)</label><input id="tripBudget" type="number" min="1" value="10000" required></div>
-      <div><label for="tripStyle">Travel Style</label><select id="tripStyle"><option>Adventure</option><option>Relaxation</option><option>Family</option><option>Nature</option><option>Culture</option></select></div>
+  <!-- PAGE 3: ITINERARY -->
+  <section id="itinerary" class="section page">
+    <p class="eyebrow">YOUR DAILY ADVENTURE</p>
+    <h2>Day-wise Itinerary</h2>
+    <div id="tripSummary" class="summary panel">
+      <h3>Your trip will appear here</h3>
+      <p>Choose a destination and generate your trip above.</p>
     </div>
-    <button class="btn" type="submit">＋ Save My Trip</button>
-  </form>
-  <div id="tripList" class="grid three trip-grid"></div>
-</section>
-
-<section class="section" id="gallery">
-  <div class="heading">
-    <span class="tag">GET INSPIRED</span>
-    <h2>📸 Travel Gallery</h2>
-    <p>Explore scenic places around the world. Select a photo to enlarge it.</p>
-  </div>
-  <div class="gallery-grid">
-    <button class="gallery-photo" data-image="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=85" aria-label="View mountain landscape"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80" alt="Mountain landscape"><span>Mountain Escape</span></button>
-    <button class="gallery-photo" data-image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=85" aria-label="View tropical beach"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" alt="Tropical beach"><span>Beach Paradise</span></button>
-    <button class="gallery-photo" data-image="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400&q=85" aria-label="View Paris"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80" alt="Paris city"><span>City Adventures</span></button>
-    <button class="gallery-photo" data-image="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1400&q=85" aria-label="View Bali"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=80" alt="Bali scenery"><span>Tropical Wonders</span></button>
-    <button class="gallery-photo" data-image="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1400&q=85" aria-label="View Goa beach"><img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=700&q=80" alt="Goa beach"><span>Goa Getaway</span></button>
-    <button class="gallery-photo" data-image="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1400&q=85" aria-label="View Kerala"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=700&q=80" alt="Kerala landscape"><span>Green Kerala</span></button>
-  </div>
-</section>
-
-<div id="galleryModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Enlarged travel photo">
-  <button id="closeGallery" class="modal-close" aria-label="Close image">✕</button>
-  <img id="largeGalleryImage" src="" alt="Enlarged travel photo">
-</div>
-
-<section class="section tinted" id="budget">
-  <div class="heading">
-    <span class="tag">PLAN YOUR EXPENSES</span>
-    <h2>💰 Travel Budget Calculator</h2>
-    <p>Estimate your trip cost before you leave.</p>
-  </div>
-  <form id="budgetForm" class="panel form-panel">
-    <div class="form-grid">
-      <div><label for="budgetPeople">Number of Travellers</label><input id="budgetPeople" type="number" min="1" max="100" value="2" required></div>
-      <div><label for="budgetDays">Number of Days</label><input id="budgetDays" type="number" min="1" max="365" value="3" required></div>
-      <div><label for="transportCost">Transport per Person (₹)</label><input id="transportCost" type="number" min="0" value="2000" required></div>
-      <div><label for="hotelCost">Hotel per Room / Night (₹)</label><input id="hotelCost" type="number" min="0" value="2500" required></div>
-      <div><label for="roomCount">Number of Rooms</label><input id="roomCount" type="number" min="1" value="1" required></div>
-      <div><label for="foodCost">Food per Person / Day (₹)</label><input id="foodCost" type="number" min="0" value="500" required></div>
-      <div><label for="activityCost">Activities per Person (₹)</label><input id="activityCost" type="number" min="0" value="1000" required></div>
-      <div><label for="extraCost">Other Expenses (₹)</label><input id="extraCost" type="number" min="0" value="500" required></div>
+    <div id="dayTabs" class="day-tabs"></div>
+    <div id="itineraryResults" class="place-grid">
+      <div class="empty-state">🧭 Generate a trip to see places arranged day by day.</div>
     </div>
-    <button class="btn" type="submit">Calculate My Budget</button>
-    <div id="budgetResult" class="budget-result hidden" aria-live="polite"></div>
-  </form>
-</section>
-
-<section class="section" id="reviews">
-  <div class="heading">
-    <span class="tag">SHARE YOUR EXPERIENCE</span>
-    <h2>⭐ Reviews & Feedback</h2>
-    <p>Rate this student project and save your feedback locally.</p>
-  </div>
-  <form id="reviewForm" class="panel form-panel">
-    <label for="reviewName">Your Name</label>
-    <input id="reviewName" maxlength="60" placeholder="Enter your name" required>
-    <label>Choose Your Rating</label>
-    <div id="starRating" class="star-rating" role="group" aria-label="Rating">
-      <button type="button" data-rating="1" aria-label="1 star">★</button>
-      <button type="button" data-rating="2" aria-label="2 stars">★</button>
-      <button type="button" data-rating="3" aria-label="3 stars">★</button>
-      <button type="button" data-rating="4" aria-label="4 stars">★</button>
-      <button type="button" data-rating="5" aria-label="5 stars">★</button>
+    <div class="action-row">
+      <button class="btn" id="downloadBtn" type="button">⬇ Download Itinerary</button>
+      <button class="btn btn-light" id="printBtn" type="button">🖨 Print Itinerary</button>
     </div>
-    <label for="reviewMessage">Your Feedback</label>
-    <textarea id="reviewMessage" rows="4" maxlength="500" placeholder="Write your feedback..." required></textarea>
-    <button class="btn" type="submit">Submit Review</button>
-    <p class="note">Reviews are saved only in this browser; they are not publicly submitted.</p>
-  </form>
-  <div id="reviewList" class="grid three review-grid"></div>
-</section>
+  </section>
 
-<section class="section tinted" id="weather">
-  <div class="heading">
-    <span class="tag">CHECK BEFORE YOU GO</span>
-    <h2>🌤️ Weather Information</h2>
-    <p>Check current weather for a city using the Open-Meteo service.</p>
-  </div>
-  <form id="weatherForm" class="panel weather-panel">
-    <label for="weatherCity">Enter City Name</label>
-    <div class="inline-form">
-      <input id="weatherCity" placeholder="e.g. Pune, Mumbai, Delhi" required maxlength="100">
-      <button class="btn" type="submit">Check Weather</button>
+  <!-- PAGE 4: DESTINATIONS -->
+  <section id="destinations" class="section page">
+    <p class="eyebrow">FIND YOUR HAPPY PLACE</p>
+    <h2>Destination Gallery</h2>
+    <p>Search a destination and explore its suggested attractions.</p>
+    <input id="placeSearch" class="search-box" type="search" placeholder="Search places, e.g. Goa, Manali...">
+    <div id="destinationGallery" class="destination-grid"></div>
+  </section>
+
+  <!-- PAGE 5: MAPS -->
+  <section id="maps" class="section page">
+    <p class="eyebrow">FIND YOUR WAY</p>
+    <h2>Explore with Google Maps</h2>
+    <div class="panel">
+      <label for="mapSearch">Enter a place or destination</label>
+      <div class="inline-form">
+        <input id="mapSearch" placeholder="Search a place...">
+        <button id="mapBtn" class="btn" type="button">Open Map</button>
+      </div>
+      <p class="hint">Google Maps opens in a new tab. Internet connection is required.</p>
     </div>
-    <div id="weatherResult" class="weather-result hidden" aria-live="polite"></div>
-    <p class="note">Requires an internet connection. City matching may not always be exact.</p>
-  </form>
-</section>
+    <div id="mapSuggestions" class="quick-links"></div>
+  </section>
 
-<section class="section" id="transport">
-  <div class="heading">
-    <span class="tag">GET THERE EASILY</span>
-    <h2>🚆 Flight & Transport</h2>
-    <p>Choose your transport option and open a travel search.</p>
-  </div>
-  <div class="grid three">
-    <article class="card transport-card">
-      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Airplane in the sky">
-      <div class="card-body"><h3>✈️ Flights</h3><p>Search flight routes, schedules and fares.</p><a class="btn small external-link" href="https://www.google.com/travel/flights" target="_blank" rel="noopener">Search Flights ↗</a></div>
-    </article>
-    <article class="card transport-card">
-      <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80" alt="Train travelling through landscape">
-      <div class="card-body"><h3>🚆 Train Travel</h3><p>Look for railway information and ticket booking.</p><a class="btn small external-link" href="https://www.irctc.co.in/" target="_blank" rel="noopener">Visit IRCTC ↗</a></div>
-    </article>
-    <article class="card transport-card">
-      <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Passenger bus">
-      <div class="card-body"><h3>🚌 Bus Travel</h3><p>Compare bus options for your route.</p><a class="btn small external-link" href="https://www.google.com/maps" target="_blank" rel="noopener">Find Routes ↗</a></div>
-    </article>
-  </div>
-  <form id="routeForm" class="panel route-form">
-    <h3>🗺️ Find a Route</h3>
-    <div class="form-grid">
-      <div><label for="routeFrom">From</label><input id="routeFrom" placeholder="Starting city" required></div>
-      <div><label for="routeTo">To</label><input id="routeTo" placeholder="Destination city" required></div>
+  <!-- PAGE 6: BUDGET -->
+  <section id="budget" class="section page">
+    <p class="eyebrow">PLAN YOUR SPENDING</p>
+    <h2>Trip Budget Calculator</h2>
+    <div class="panel form-grid">
+      <label>Travellers <input type="number" id="budgetPeople" min="1" value="2"></label>
+      <label>Days <input type="number" id="budgetDays" min="1" value="3"></label>
+      <label>Hotel cost per night (₹) <input type="number" id="hotelCost" min="0" value="2000"></label>
+      <label>Food per person/day (₹) <input type="number" id="foodCost" min="0" value="600"></label>
+      <label>Transport total (₹) <input type="number" id="transportCost" min="0" value="3000"></label>
+      <label>Activities total (₹) <input type="number" id="activityCost" min="0" value="2000"></label>
+      <button id="calculateBudget" class="btn full" type="button">Calculate Budget</button>
     </div>
-    <button class="btn" type="submit">Open Route Search ↗</button>
-  </form>
-</section>
+    <div id="budgetResult" class="budget-result">
+      <span>Estimated Total</span><strong>₹0</strong>
+    </div>
+  </section>
 
-<section class="section contact-section" id="contact">
-  <div class="heading">
-    <span class="tag">GET IN TOUCH</span>
-    <h2>💌 Contact Us</h2>
-    <p>Send your project feedback using this demo form.</p>
-  </div>
-  <form id="contactForm" class="panel form-panel">
-    <label for="contactName">Your Name</label>
-    <input id="contactName" required maxlength="80">
-    <label for="contactEmail">Email Address</label>
-    <input id="contactEmail" type="email" required>
-    <label for="contactMessage">Message</label>
-    <textarea id="contactMessage" rows="4" required maxlength="1000"></textarea>
-    <button class="btn" type="submit">Submit Message</button>
-    <p id="contactStatus" class="note" aria-live="polite"></p>
-    <p class="note">Demo only. This form does not email or send your message.</p>
-  </form>
-</section>
+  <!-- PAGE 7: EXPENSE TRACKER -->
+  <section id="expenses" class="section page">
+    <p class="eyebrow">KEEP TRACK</p>
+    <h2>Daily Expense Tracker</h2>
+    <form id="expenseForm" class="panel inline-form">
+      <input id="expenseName" placeholder="Expense name" required>
+      <input id="expenseAmount" type="number" min="1" placeholder="Amount ₹" required>
+      <select id="expenseCategory">
+        <option>Food</option><option>Travel</option><option>Hotel</option>
+        <option>Shopping</option><option>Activities</option><option>Other</option>
+      </select>
+      <button class="btn" type="submit">Add Expense</button>
+    </form>
+    <div id="expenseTotal" class="budget-result"><span>Total Expenses</span><strong>₹0</strong></div>
+    <div id="expenseList" class="list-panel"></div>
+  </section>
+
+  <!-- PAGE 8: PACKING -->
+  <section id="packing" class="section page">
+    <p class="eyebrow">DON'T FORGET THE ESSENTIALS</p>
+    <h2>Packing Checklist</h2>
+    <div class="panel">
+      <div class="packing-progress"><span id="packingProgress">0 of 0 packed</span></div>
+      <div id="packingList" class="checklist"></div>
+      <form id="packingForm" class="inline-form">
+        <input id="customPacking" placeholder="Add your own item">
+        <button class="btn" type="submit">Add Item</button>
+      </form>
+      <button id="resetPacking" class="btn btn-light" type="button">Reset Checklist</button>
+    </div>
+  </section>
+
+  <!-- PAGE 9: WEATHER -->
+  <section id="weather" class="section page">
+    <p class="eyebrow">CHECK BEFORE YOU GO</p>
+    <h2>Weather Information</h2>
+    <div class="panel">
+      <p>Search your destination to check its current weather forecast online.</p>
+      <div class="inline-form">
+        <input id="weatherCity" placeholder="Enter city name">
+        <button id="weatherBtn" class="btn" type="button">Check Weather</button>
+      </div>
+      <p class="hint">This opens a weather search page. Live weather data is not built into this demo.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 10: HOTELS -->
+  <section id="hotels" class="section page">
+    <p class="eyebrow">REST AND RECHARGE</p>
+    <h2>Hotel Suggestions</h2>
+    <p>Search hotels in your selected destination.</p>
+    <div class="panel inline-form">
+      <input id="hotelCity" placeholder="Enter destination">
+      <button id="hotelBtn" class="btn" type="button">Find Hotels</button>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card"><span>🏨</span><h3>Budget Stay</h3><p>Search affordable hotels and guest houses.</p></article>
+      <article class="feature-card"><span>🏡</span><h3>Family Stay</h3><p>Look for family-friendly accommodation.</p></article>
+      <article class="feature-card"><span>🌴</span><h3>Nature Stay</h3><p>Explore stays close to nature.</p></article>
+    </div>
+  </section>
+
+  <!-- PAGE 11: TRANSPORT -->
+  <section id="transport" class="section page">
+    <p class="eyebrow">GET THERE YOUR WAY</p>
+    <h2>Transport Options</h2>
+    <div class="panel">
+      <label for="transportFrom">Starting city</label>
+      <input id="transportFrom" placeholder="e.g. Pune">
+      <label for="transportTo">Destination</label>
+      <input id="transportTo" placeholder="e.g. Goa">
+      <div class="transport-grid">
+        <button class="feature-card transport-btn" data-mode="train" type="button">🚆<h3>Train</h3><p>Search train options</p></button>
+        <button class="feature-card transport-btn" data-mode="bus" type="button">🚌<h3>Bus</h3><p>Search bus options</p></button>
+        <button class="feature-card transport-btn" data-mode="flight" type="button">✈️<h3>Flight</h3><p>Search flight options</p></button>
+        <button class="feature-card transport-btn" data-mode="car" type="button">🚗<h3>Car</h3><p>Get driving directions</p></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 12: FAVOURITES + EXTRA TOOLS -->
+  <section id="tools" class="section page">
+    <p class="eyebrow">YOUR TRAVEL TOOLKIT</p>
+    <h2>More Travel Features</h2>
+    <div class="feature-grid">
+      <a class="feature-card" href="#favourites"><span>❤️</span><h3>Favourites</h3><p>Save places you love.</p></a>
+      <a class="feature-card" href="#packing"><span>🎒</span><h3>Packing List</h3><p>Keep your essentials ready.</p></a>
+      <a class="feature-card" href="#expenses"><span>💰</span><h3>Expense Tracker</h3><p>Record your trip expenses.</p></a>
+      <a class="feature-card" href="#maps"><span>📍</span><h3>Google Maps</h3><p>Find directions to attractions.</p></a>
+    </div>
+  </section>
+
+  <section id="favourites" class="section page">
+    <p class="eyebrow">SAVED FOR LATER</p>
+    <h2>My Favourite Places ❤️</h2>
+    <div id="favouriteList" class="destination-grid">
+      <div class="empty-state">Your favourite places will appear here.</div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
-  <a class="logo" href="#home">✈️ AI Trip Planner</a>
-  <p>Explore the world. Plan your journey. Make memories.</p>
-  <div class="footer-links">
-    <a href="#home">Home</a><a href="#hotels">Hotels</a>
-    <a href="#mytrips">My Trips</a><a href="#budget">Budget</a>
-    <a href="#weather">Weather</a><a href="#contact">Contact</a>
-  </div>
-  <p>© <span id="year"></span> AI Trip Planner | College Project</p>
+  <a class="logo" href="#home">🌿 WanderWise</a>
+  <p>Explore the world, one day at a time.</p>
+  <p class="hint">A student project demo. Confirm travel, weather and booking details with the relevant providers.</p>
 </footer>
 
-<button id="backToTop" aria-label="Back to top">↑</button>
+<button id="topBtn" class="top-btn" type="button" aria-label="Back to top">↑</button>
+
 <script src="script.js"></script>
 </body>
 </html>
