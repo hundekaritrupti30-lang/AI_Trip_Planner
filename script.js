@@ -1,563 +1,606 @@
-const $ = selector => document.querySelector(selector);
-const $$ = selector => [...document.querySelectorAll(selector)];
 
-const STORE = {
-  get(key, fallback = []) {
-    try {
-      const value = localStorage.getItem(key);
-      return value === null ? fallback : JSON.parse(value);
-    } catch {
-      return fallback;
-    }
-  },
-  set(key, value) {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-      return true;
-    } catch {
-      alert("Browser storage is unavailable. Please check your browser settings.");
-      return false;
-    }
-  }
+const $ = (id) => document.getElementById(id);
+
+const destinations = {
+  Manali: [
+    ["Hadimba Temple", "A peaceful temple surrounded by cedar trees.", "photo-1472396961693-142e6e269027", "Morning"],
+    ["Mall Road", "Explore local shops, cafes and street food.", "photo-1517248135467-4c7edcad34c4", "Afternoon"],
+    ["Solang Valley", "Enjoy mountain views and outdoor activities.", "photo-1464822759023-fed622ff2c3b", "Evening"],
+    ["Atal Tunnel", "See the famous mountain tunnel and scenic views.", "photo-1464278533981-50106e6176b1", "Morning"],
+    ["Old Manali", "Walk around the cafes and peaceful lanes.", "photo-1441974231531-c6227db76b6e", "Afternoon"],
+    ["Vashisht Temple", "Visit the traditional temple area.", "photo-1500530855697-b586d89ba3ee", "Evening"],
+    ["Jogini Waterfall", "Enjoy a nature walk to a beautiful waterfall.", "photo-1433086966358-54859d0ed716", "Morning"]
+  ],
+  Goa: [
+    ["Baga Beach", "Relax by the sea and enjoy the beach atmosphere.", "photo-1507525428034-b723cf961d3e", "Morning"],
+    ["Fort Aguada", "Explore the historic fort and coastal views.", "photo-1464822759023-fed622ff2c3b", "Afternoon"],
+    ["Calangute Beach", "Enjoy a beach walk and local food.", "photo-1519046904884-53103b34b206", "Evening"],
+    ["Old Goa Churches", "Discover historic churches and architecture.", "photo-1519608487953-e999c86e7455", "Morning"],
+    ["Dudhsagar Falls", "Admire the famous waterfall and green surroundings.", "photo-1433086966358-54859d0ed716", "Afternoon"],
+    ["Fontainhas", "Walk through colourful heritage streets.", "photo-1511818966892-d7d671e672a2", "Evening"],
+    ["Palolem Beach", "Enjoy a relaxed coastal day.", "photo-1473116763249-2faaef81ccda", "Morning"]
+  ],
+  Jaipur: [
+    ["Hawa Mahal", "See Jaipur's famous palace facade.", "photo-1519608487953-e999c86e7455", "Morning"],
+    ["Amber Fort", "Explore the historic hilltop fort.", "photo-1464822759023-fed622ff2c3b", "Afternoon"],
+    ["City Palace", "Discover royal courtyards and collections.", "photo-1511818966892-d7d671e672a2", "Evening"],
+    ["Jantar Mantar", "Visit the historic astronomical instruments.", "photo-1519608487953-e999c86e7455", "Morning"],
+    ["Jal Mahal", "Admire the palace surrounded by water.", "photo-1500530855697-b586d89ba3ee", "Afternoon"],
+    ["Local Bazaars", "Shop for handicrafts and souvenirs.", "photo-1441986300917-64674bd600d8", "Evening"]
+  ],
+  Mumbai: [
+    ["Gateway of India", "See the iconic waterfront monument.", "photo-1519608487953-e999c86e7455", "Morning"],
+    ["Marine Drive", "Enjoy the famous coastal promenade.", "photo-1519046904884-53103b34b206", "Afternoon"],
+    ["Elephanta Caves", "Explore historic rock-cut cave temples.", "photo-1472396961693-142e6e269027", "Evening"],
+    ["Siddhivinayak Temple", "Visit the well-known temple.", "photo-1500530855697-b586d89ba3ee", "Morning"],
+    ["Juhu Beach", "Relax and try local beach snacks.", "photo-1507525428034-b723cf961d3e", "Afternoon"],
+    ["Bandra Fort", "Enjoy views along the waterfront.", "photo-1473116763249-2faaef81ccda", "Evening"]
+  ],
+  Pune: [
+    ["Shaniwar Wada", "Discover Pune's historic fortification.", "photo-1519608487953-e999c86e7455", "Morning"],
+    ["Aga Khan Palace", "Explore an important historical landmark.", "photo-1511818966892-d7d671e672a2", "Afternoon"],
+    ["Sinhagad Fort", "Enjoy a hilltop visit and scenic views.", "photo-1464822759023-fed622ff2c3b", "Evening"],
+    ["Dagdusheth Temple", "Visit a famous city temple.", "photo-1500530855697-b586d89ba3ee", "Morning"],
+    ["Pune Okayama Garden", "Relax in a Japanese-style garden.", "photo-1441974231531-c6227db76b6e", "Afternoon"],
+    ["Khadakwasla Dam", "Enjoy the lakeside scenery.", "photo-1473116763249-2faaef81ccda", "Evening"]
+  ],
+  Mahabaleshwar: [
+    ["Arthur's Seat", "Enjoy sweeping views of the valley.", "photo-1464822759023-fed622ff2c3b", "Morning"],
+    ["Venna Lake", "Relax beside the lake.", "photo-1473116763249-2faaef81ccda", "Afternoon"],
+    ["Elephant's Head Point", "See a dramatic mountain viewpoint.", "photo-1500530855697-b586d89ba3ee", "Evening"],
+    ["Mapro Garden", "Take a break and explore local treats.", "photo-1517248135467-4c7edcad34c4", "Morning"],
+    ["Lingmala Waterfall", "Enjoy a scenic waterfall viewpoint.", "photo-1433086966358-54859d0ed716", "Afternoon"],
+    ["Wilson Point", "Visit a popular hilltop viewpoint.", "photo-1472396961693-142e6e269027", "Evening"]
+  ],
+  Kerala: [
+    ["Munnar Tea Gardens", "Walk through scenic tea-growing landscapes.", "photo-1441974231531-c6227db76e6", "Morning"],
+    ["Alleppey Backwaters", "Explore peaceful waterways and village scenery.", "photo-1473116763249-2faaef81ccda", "Afternoon"],
+    ["Fort Kochi", "Discover heritage streets and coastal culture.", "photo-1511818966892-d7d671e672a2", "Evening"],
+    ["Eravikulam National Park", "Explore mountain scenery and nature trails.", "photo-1472396961693-142e6e269027", "Morning"],
+    ["Mattancherry Palace", "Visit a historic palace and museum.", "photo-1519608487953-e999c86e7455", "Afternoon"],
+    ["Kovalam Beach", "Relax along the coastline.", "photo-1507525428034-b723cf961d3e", "Evening"]
+  ],
+  Shimla: [
+    ["The Ridge", "Enjoy open views and a central walking area.", "photo-1464822759023-fed622ff2c3b", "Morning"],
+    ["Mall Road", "Explore shops, cafes and local life.", "photo-1517248135467-4c7edcad34c4", "Afternoon"],
+    ["Jakhoo Temple", "Visit a hilltop temple surrounded by nature.", "photo-1472396961693-142e6e269027", "Evening"],
+    ["Kufri", "Enjoy mountain scenery outside the city.", "photo-1464278533981-50106e6176b1", "Morning"],
+    ["Christ Church", "See the historic church on the Ridge.", "photo-1511818966892-d7d671e672a2", "Afternoon"],
+    ["Green Valley", "Admire forested hills and valley views.", "photo-1441974231531-c6227db76e6", "Evening"]
+  ],
+  Rishikesh: [
+    ["Lakshman Jhula Area", "Explore the riverside and nearby streets.", "photo-1473116763249-2faaef81ccda", "Morning"],
+    ["Triveni Ghat", "Visit a well-known riverside ghat.", "photo-1500530855697-b586d89ba3ee", "Afternoon"],
+    ["Ram Jhula", "Walk around the river and temple area.", "photo-1441974231531-c6227db76e6", "Evening"],
+    ["Neer Garh Waterfall", "Enjoy a nature walk to the waterfall.", "photo-1433086966358-54859d0ed716", "Morning"],
+    ["Beatles Ashram", "Explore a unique historic and artistic site.", "photo-1472396961693-142e6e269027", "Afternoon"],
+    ["Ganga Riverside", "Relax beside the river.", "photo-1507525428034-b723cf961d3e", "Evening"]
+  ],
+  Agra: [
+    ["Taj Mahal", "Visit the world-famous marble monument.", "photo-1564507592333-c60657eea523", "Morning"],
+    ["Agra Fort", "Explore a grand historic fort.", "photo-1519608487953-e999c86e7455", "Afternoon"],
+    ["Mehtab Bagh", "Enjoy garden views towards the Taj Mahal.", "photo-1473116763249-2faaef81ccda", "Evening"],
+    ["Fatehpur Sikri", "Discover a historic Mughal city.", "photo-1511818966892-d7d671e672a2", "Morning"],
+    ["Itimad-ud-Daulah", "See an elegant historic tomb.", "photo-1519608487953-e999c86e7455", "Afternoon"],
+    ["Local Handicraft Market", "Browse traditional crafts and souvenirs.", "photo-1441986300917-64674bd600d8", "Evening"]
+  ],
+  Lonavala: [
+    ["Tiger's Leap", "Enjoy dramatic views of the valley.", "photo-1464822759023-fed622ff2c3b", "Morning"],
+    ["Bhushi Dam", "Visit a popular local water spot.", "photo-1473116763249-2faaef81ccda", "Afternoon"],
+    ["Karla Caves", "Explore ancient rock-cut caves.", "photo-1519608487953-e999c86e7455", "Evening"],
+    ["Lohagad Fort", "Enjoy a historic fort and hill walk.", "photo-1472396961693-142e6e269027", "Morning"],
+    ["Pawna Lake", "Relax beside a scenic lake.", "photo-1500530855697-b586d89ba3ee", "Afternoon"],
+    ["Lion's Point", "See the surrounding mountain landscape.", "photo-1464278533981-50106e6176b1", "Evening"]
+  ],
+  Nashik: [
+    ["Trimbakeshwar Temple", "Visit an important historic temple.", "photo-1500530855697-b586d89ba3ee", "Morning"],
+    ["Pandavleni Caves", "Explore ancient rock-cut caves.", "photo-1519608487953-e999c86e7455", "Afternoon"],
+    ["Ramkund", "Visit a well-known riverside location.", "photo-1473116763249-2faaef81ccda", "Evening"],
+    ["Sula Area", "Explore scenic countryside around the region.", "photo-1441974231531-c6227db76e6", "Morning"],
+    ["Anjaneri Hills", "Enjoy a nature outing with mountain views.", "photo-1464822759023-fed622ff2c3b", "Afternoon"],
+    ["Gangapur Dam", "Relax by the water and enjoy the scenery.", "photo-1507525428034-b723cf961d3e", "Evening"]
+  ]
 };
+
+const extraPlaces = [
+  ["Local Food Market", "Try regional food and discover local flavours.", "photo-1504674900247-0877df9cc836", "Morning"],
+  ["Nature Viewpoint", "Take photos and enjoy the natural surroundings.", "photo-1441974231531-c6227db76e6", "Afternoon"],
+  ["Local Shopping Street", "Browse souvenirs and local products.", "photo-1441986300917-64674bd600d8", "Evening"]
+];
+
+let currentDestination = "Manali";
+let currentDays = [];
+let activeDay = 0;
+let favourites = readStore("wanderwise-favourites", []);
+let expenses = readStore("wanderwise-expenses", []);
+let packedItems = [
+  "Clothes", "Comfortable shoes", "ID proof", "Phone charger",
+  "Personal medicines", "Water bottle", "Toiletries", "Travel tickets"
+].map((name, index) => ({ id: index + 1, name, done: false }));
+
+function readStore(key, fallback) {
+  try {
+    const data = JSON.parse(localStorage.getItem(key));
+    return data ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStore(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // The feature still works for the current page session.
+  }
+}
 
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, char => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;",
     '"': "&quot;", "'": "&#39;"
-  })[char]);
+  }[char]));
 }
 
-function money(value) {
-  return "₹" + Math.round(value).toLocaleString("en-IN");
+function imageUrl(photoId) {
+  return `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=800&q=80`;
 }
 
-$("#year").textContent = new Date().getFullYear();
-
-// Mobile menu
-$("#menuToggle").addEventListener("click", () => {
-  const open = $("#navbar").classList.toggle("open");
-  $("#menuToggle").setAttribute("aria-expanded", String(open));
-});
-
-$("#navbar").querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => $("#navbar").classList.remove("open"));
-});
-
-// Dark mode
-if (STORE.get("tripTheme", "light") === "dark") {
-  document.body.classList.add("dark");
-  $("#themeToggle").textContent = "☀️";
+function mapsUrl(place, destination = currentDestination) {
+  return "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(`${place}, ${destination}`);
 }
 
-$("#themeToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  const dark = document.body.classList.contains("dark");
-  $("#themeToggle").textContent = dark ? "☀️" : "🌙";
-  STORE.set("tripTheme", dark ? "dark" : "light");
-});
-
-// Packing checklist
-const defaultPacking = [
-  "Clothes", "Comfortable shoes", "Toiletries", "Phone charger",
-  "Power bank", "Photo ID", "Tickets", "Medicines if needed",
-  "Water bottle", "Travel bag", "Weather-appropriate clothing",
-  "Emergency contacts"
-];
-
-let packingItems = STORE.get("tripPacking", null);
-if (!Array.isArray(packingItems)) {
-  packingItems = defaultPacking.map((name, index) => ({
-    id: index + 1, name, checked: false
-  }));
-}
-
-function renderPacking() {
-  $("#packingList").innerHTML = packingItems.map(item => `
-    <label class="pack-item ${item.checked ? "checked" : ""}">
-      <input type="checkbox" data-pack="${item.id}" ${item.checked ? "checked" : ""}>
-      <span>${escapeHTML(item.name)}</span>
-    </label>
-  `).join("");
-
-  const checked = packingItems.filter(item => item.checked).length;
-  const percent = packingItems.length
-    ? Math.round(checked / packingItems.length * 100)
-    : 0;
-
-  $("#packingProgress").textContent =
-    `${checked} of ${packingItems.length} packed (${percent}%)`;
-  $("#packingBar").style.width = percent + "%";
-
-  STORE.set("tripPacking", packingItems);
-}
-
-$("#packingList").addEventListener("change", event => {
-  const input = event.target.closest("[data-pack]");
-  if (!input) return;
-
-  packingItems = packingItems.map(item =>
-    item.id === Number(input.dataset.pack)
-      ? { ...item, checked: input.checked }
-      : item
+function makePlaceCard(place, destination, dayNumber = 0, index = 0) {
+  const [name, description, photo, time] = place;
+  const saved = favourites.some(item =>
+    item.name === name && item.destination === destination
   );
 
-  renderPacking();
-});
-
-$("#addPackingForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const name = $("#customPacking").value.trim();
-  if (!name) return;
-
-  packingItems.push({
-    id: Date.now() + Math.random(),
-    name,
-    checked: false
-  });
-
-  $("#customPacking").value = "";
-  renderPacking();
-});
-
-$("#resetPacking").addEventListener("click", () => {
-  packingItems = packingItems.map(item => ({ ...item, checked: false }));
-  renderPacking();
-});
-
-renderPacking();
-
-// Food search and filter
-function filterFood() {
-  const query = $("#foodSearch").value.trim().toLowerCase();
-  const type = $("#foodFilter").value;
-
-  $$(".food-card").forEach(card => {
-    const matchName = card.dataset.name.toLowerCase().includes(query);
-    const matchType = type === "all" || card.dataset.type === type;
-    card.classList.toggle("hidden", !(matchName && matchType));
-  });
+  return `
+    <article class="place-card">
+      <img src="${imageUrl(photo)}" alt="${escapeHTML(name)}"
+           loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80'">
+      <div class="place-content">
+        <button class="fav-btn" type="button"
+          data-fav-name="${escapeHTML(name)}"
+          data-fav-destination="${escapeHTML(destination)}"
+          aria-label="Toggle favourite">${saved ? "❤️" : "♡"}</button>
+        <span class="place-meta">${dayNumber ? `DAY ${dayNumber} · ` : ""}${escapeHTML(time || "Visit")}</span>
+        <h3>${escapeHTML(name)}</h3>
+        <p>${escapeHTML(description)}</p>
+        <a class="btn" target="_blank" rel="noopener" href="${mapsUrl(name, destination)}">📍 View on Map</a>
+      </div>
+    </article>`;
 }
 
-$("#foodSearch").addEventListener("input", filterFood);
-$("#foodFilter").addEventListener("change", filterFood);
-
-let foodList = STORE.get("tripFood", []);
-
-function renderFoodList() {
-  $("#myFoodList").innerHTML = foodList.length
-    ? foodList.map((item, index) => `
-        <li>${escapeHTML(item)}
-          <button type="button" class="text-btn" data-remove-food="${index}">Remove</button>
-        </li>
-      `).join("")
-    : "<li>No food items added yet.</li>";
-
-  STORE.set("tripFood", foodList);
+function getPlaces(destination) {
+  const key = Object.keys(destinations).find(
+    name => name.toLowerCase() === destination.trim().toLowerCase()
+  );
+  return key ? destinations[key] : [
+    [`${destination} Main Attraction`, `Explore popular sights in ${destination}.`, "photo-1470770841072-f978cf4d019e", "Morning"],
+    [`${destination} Local Area`, `Discover local culture, food and markets in ${destination}.`, "photo-1441986300917-64674bd600d8", "Afternoon"],
+    [`${destination} Scenic Spot`, `Enjoy nature and scenic views around ${destination}.`, "photo-1464822759023-fed622ff2c3b", "Evening"],
+    ...extraPlaces
+  ];
 }
 
-$("#foodGrid").addEventListener("click", event => {
-  const button = event.target.closest("[data-food]");
-  if (!button) return;
+function buildItinerary(destination, days) {
+  const places = getPlaces(destination);
+  currentDays = [];
 
-  if (!foodList.includes(button.dataset.food)) {
-    foodList.push(button.dataset.food);
-    renderFoodList();
-    button.textContent = "✓ Added to food list";
-  } else {
-    alert("This item is already in your food list.");
+  for (let day = 0; day < days; day++) {
+    const start = (day * 3) % places.length;
+    const dailyPlaces = [];
+
+    for (let j = 0; j < 3; j++) {
+      dailyPlaces.push(places[(start + j) % places.length]);
+    }
+
+    currentDays.push(dailyPlaces);
   }
-});
 
-$("#myFoodList").addEventListener("click", event => {
-  const button = event.target.closest("[data-remove-food]");
-  if (!button) return;
-  foodList.splice(Number(button.dataset.removeFood), 1);
-  renderFoodList();
-});
-
-renderFoodList();
-
-// My Trips
-let trips = STORE.get("tripSavedTrips", []);
-if (!Array.isArray(trips)) trips = [];
-
-function renderTrips() {
-  $("#tripList").innerHTML = trips.length
-    ? trips.map(trip => `
-      <article class="trip-card">
-        <span class="pill">✈️ Saved Trip</span>
-        <h3>📍 ${escapeHTML(trip.destination)}</h3>
-        <p>📅 ${escapeHTML(trip.date)}</p>
-        <p>🗓️ ${trip.days} day(s) · 👥 ${trip.people} traveller(s)</p>
-        <p>🎒 ${escapeHTML(trip.style)}</p>
-        <p>💰 Budget: ${money(trip.budget)}</p>
-        <button class="btn small" data-print-trip="${trip.id}">Print / PDF</button>
-        <button class="danger-btn" data-delete-trip="${trip.id}">Delete</button>
-      </article>
-    `).join("")
-    : '<div class="panel"><p>No saved trips yet. Create your first trip above!</p></div>';
-
-  STORE.set("tripSavedTrips", trips);
+  activeDay = 0;
+  renderItinerary();
 }
 
-$("#tripForm").addEventListener("submit", event => {
+function renderItinerary() {
+  const tabs = $("dayTabs");
+  const results = $("itineraryResults");
+
+  tabs.innerHTML = currentDays.map((_, index) => `
+    <button type="button" class="day-tab ${index === activeDay ? "active" : ""}"
+      data-day="${index}">Day ${index + 1}</button>
+  `).join("");
+
+  const date = $("startDate").value;
+  let dateLabel = "";
+  if (date) {
+    const d = new Date(`${date}T12:00:00`);
+    d.setDate(d.getDate() + activeDay);
+    dateLabel = d.toLocaleDateString(undefined, {
+      day: "numeric", month: "short", year: "numeric"
+    });
+  }
+
+  results.innerHTML = currentDays[activeDay].map((place, index) =>
+    makePlaceCard(place, currentDestination, activeDay + 1, index)
+  ).join("");
+
+  $("tripSummary").innerHTML = `
+    <h3>🌍 ${escapeHTML(currentDestination)} Trip</h3>
+    <p><strong>${currentDays.length} days</strong> · Day ${activeDay + 1}
+    ${dateLabel ? ` · ${dateLabel}` : ""}</p>
+    <p>Three suggested places are arranged for this day. Select another day above to see its places.</p>`;
+}
+
+function generateTrip(event) {
   event.preventDefault();
 
-  const destination = $("#tripDestination").value.trim();
-  const date = $("#tripDate").value;
-  const days = Number($("#tripDays").value);
-  const people = Number($("#tripPeople").value);
-  const budget = Number($("#tripBudget").value);
+  const destination = $("destinationInput").value.trim();
+  const days = Number($("daysInput").value);
+  const travellers = Number($("travellersInput").value);
+  const budget = Number($("budgetInput").value);
 
-  if (!destination || !date || days < 1 || people < 1 || budget < 1) {
+  if (!destination || days < 1 || days > 7 || travellers < 1 || budget < 0) {
     alert("Please enter valid trip details.");
     return;
   }
 
-  trips.unshift({
-    id: Date.now(),
-    destination,
-    date,
-    days,
-    people,
-    budget,
-    style: $("#tripStyle").value
-  });
+  currentDestination = destination;
+  $("budgetPeople").value = travellers;
+  $("budgetDays").value = days;
+  $("weatherCity").value = destination;
+  $("hotelCity").value = destination;
+  $("mapSearch").value = destination;
 
-  if (!STORE.set("tripSavedTrips", trips)) {
-    trips.shift();
+  buildItinerary(destination, days);
+  calculateBudget();
+  document.querySelector("#itinerary").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderGallery(query = "") {
+  const gallery = $("destinationGallery");
+  const names = Object.keys(destinations);
+  const filtered = names.filter(name =>
+    name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  gallery.innerHTML = filtered.length ? filtered.map(name => {
+    const place = destinations[name][0];
+    return `
+      <article class="destination-card">
+        <img src="${imageUrl(place[2])}" alt="${escapeHTML(name)}" loading="lazy">
+        <div class="place-content">
+          <h3>${escapeHTML(name)}</h3>
+          <p>${escapeHTML(place[1])}</p>
+          <button class="btn choose-destination" type="button"
+            data-destination="${escapeHTML(name)}">Explore Places</button>
+          <a class="btn btn-light" target="_blank" rel="noopener"
+            href="${mapsUrl(name, name)}">Open Map</a>
+        </div>
+      </article>`;
+  }).join("") : `<div class="empty-state">No matching destination found. Try another name.</div>`;
+}
+
+function renderFavourites() {
+  const container = $("favouriteList");
+  if (!favourites.length) {
+    container.innerHTML = `<div class="empty-state">❤️ No favourites yet. Press ♡ on a place to save it here.</div>`;
     return;
   }
 
-  $("#tripForm").reset();
-  $("#tripDays").value = 3;
-  $("#tripPeople").value = 2;
-  $("#tripBudget").value = 10000;
-  renderTrips();
-});
-
-$("#tripList").addEventListener("click", event => {
-  const removeButton = event.target.closest("[data-delete-trip]");
-  const printButton = event.target.closest("[data-print-trip]");
-
-  if (removeButton) {
-    const id = Number(removeButton.dataset.deleteTrip);
-    const previous = trips;
-    trips = trips.filter(trip => trip.id !== id);
-
-    if (!STORE.set("tripSavedTrips", trips)) {
-      trips = previous;
-      return;
-    }
-    renderTrips();
-  }
-
-  if (printButton) {
-    const trip = trips.find(item => item.id === Number(printButton.dataset.printTrip));
-    if (!trip) return;
-
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) {
-      alert("Allow pop-ups in your browser to print the trip.");
-      return;
-    }
-
-    printWindow.document.write(`
-      <!DOCTYPE html><html><head><title>Trip Plan</title>
-      <style>body{font-family:Arial;padding:30px;line-height:1.8}</style>
-      </head><body>
-      <h1>AI Trip Planner</h1>
-      <h2>${escapeHTML(trip.destination)}</h2>
-      <p>Date: ${escapeHTML(trip.date)}</p>
-      <p>Days: ${trip.days}</p><p>Travellers: ${trip.people}</p>
-      <p>Style: ${escapeHTML(trip.style)}</p>
-      <h3>Budget: ${money(trip.budget)}</h3>
-      <p>Saved trip summary generated by AI Trip Planner.</p>
-      <script>window.onload=()=>window.print();<\/script>
-      </body></html>
-    `);
-    printWindow.document.close();
-  }
-});
-
-renderTrips();
-
-// Hotels can be added to My Trips
-$$("[data-hotel]").forEach(button => {
-  button.addEventListener("click", () => {
-    const hotel = button.dataset.hotel;
-    const existing = trips.find(t => t.destination === hotel);
-
-    if (existing) {
-      alert("This stay idea is already saved in My Trips.");
-      return;
-    }
-
-    trips.unshift({
-      id: Date.now(),
-      destination: hotel,
-      date: new Date().toISOString().slice(0, 10),
-      days: 1,
-      people: 1,
-      budget: 0,
-      style: "Accommodation idea"
-    });
-
-    if (!STORE.set("tripSavedTrips", trips)) {
-      trips.shift();
-      return;
-    }
-
-    renderTrips();
-    button.textContent = "✓ Added";
-    $("#mytrips").scrollIntoView({ behavior: "smooth" });
-  });
-});
-
-// Gallery lightbox
-$$(".gallery-photo").forEach(button => {
-  button.addEventListener("click", () => {
-    $("#largeGalleryImage").src = button.dataset.image;
-    $("#galleryModal").classList.remove("hidden");
-    $("#closeGallery").focus();
-  });
-});
-
-function closeGallery() {
-  $("#galleryModal").classList.add("hidden");
-  $("#largeGalleryImage").src = "";
+  container.innerHTML = favourites.map(item => `
+    <article class="destination-card">
+      <img src="${imageUrl(item.photo)}" alt="${escapeHTML(item.name)}" loading="lazy">
+      <div class="place-content">
+        <h3>${escapeHTML(item.name)}</h3>
+        <p>${escapeHTML(item.destination)}</p>
+        <a class="btn" target="_blank" rel="noopener"
+          href="${mapsUrl(item.name, item.destination)}">View Map</a>
+        <button class="btn btn-light remove-fav" type="button"
+          data-fav-name="${escapeHTML(item.name)}"
+          data-fav-destination="${escapeHTML(item.destination)}">Remove</button>
+      </div>
+    </article>`).join("");
 }
 
-$("#closeGallery").addEventListener("click", closeGallery);
+function toggleFavourite(name, destination) {
+  const exists = favourites.some(item =>
+    item.name === name && item.destination === destination
+  );
 
-$("#galleryModal").addEventListener("click", event => {
-  if (event.target === $("#galleryModal")) closeGallery();
+  if (exists) {
+    favourites = favourites.filter(item =>
+      !(item.name === name && item.destination === destination)
+    );
+  } else {
+    const allPlaces = Object.values(destinations).flat();
+    const place = allPlaces.find(item => item[0] === name) ||
+      extraPlaces.find(item => item[0] === name);
+    favourites.push({
+      name,
+      destination,
+      photo: place ? place[2] : "photo-1470770841072-f978cf4d019e"
+    });
+  }
+
+  saveStore("wanderwise-favourites", favourites);
+  renderItinerary();
+  renderGallery($("placeSearch").value);
+  renderFavourites();
+}
+
+function calculateBudget() {
+  const people = Math.max(1, Number($("budgetPeople").value) || 1);
+  const days = Math.max(1, Number($("budgetDays").value) || 1);
+  const hotel = Math.max(0, Number($("hotelCost").value) || 0);
+  const food = Math.max(0, Number($("foodCost").value) || 0);
+  const transport = Math.max(0, Number($("transportCost").value) || 0);
+  const activities = Math.max(0, Number($("activityCost").value) || 0);
+
+  const hotelTotal = hotel * Math.max(0, days - 1);
+  const foodTotal = food * people * days;
+  const total = hotelTotal + foodTotal + transport + activities;
+
+  $("budgetResult").innerHTML = `
+    <div><span>Estimated Total</span><br>
+    <strong>₹${total.toLocaleString("en-IN")}</strong>
+    <p>Hotel: ₹${hotelTotal.toLocaleString("en-IN")} · Food: ₹${foodTotal.toLocaleString("en-IN")}
+    <br>Transport: ₹${transport.toLocaleString("en-IN")} · Activities: ₹${activities.toLocaleString("en-IN")}</p>
+    <small>Estimate only. Actual prices may differ.</small></div>`;
+}
+
+function renderExpenses() {
+  $("expenseTotal").innerHTML = `
+    <span>Total Expenses</span>
+    <strong>₹${expenses.reduce((sum, item) => sum + item.amount, 0).toLocaleString("en-IN")}</strong>`;
+
+  $("expenseList").innerHTML = expenses.length ? expenses.map(item => `
+    <div class="expense-item">
+      <div><strong>${escapeHTML(item.name)}</strong><br>
+      <small>${escapeHTML(item.category)}</small></div>
+      <strong>₹${item.amount.toLocaleString("en-IN")}</strong>
+      <button class="delete-btn" data-expense-id="${item.id}" type="button">Delete</button>
+    </div>`).join("") : `<div class="empty-state">No expenses added yet.</div>`;
+}
+
+function renderPacking() {
+  const packed = packedItems.filter(item => item.done).length;
+  $("packingProgress").textContent = `${packed} of ${packedItems.length} packed`;
+  document.querySelector(".packing-progress").style.setProperty(
+    "--progress", `${packedItems.length ? packed / packedItems.length * 100 : 0}%`
+  );
+
+  $("packingList").innerHTML = packedItems.map(item => `
+    <label class="check-item ${item.done ? "done" : ""}">
+      <input type="checkbox" data-pack-id="${item.id}" ${item.done ? "checked" : ""}>
+      <span>${escapeHTML(item.name)}</span>
+    </label>`).join("");
+}
+
+function openSearch(url) {
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function openMapSearch() {
+  const query = $("mapSearch").value.trim() || currentDestination;
+  openSearch("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query));
+}
+
+function openWeather() {
+  const city = $("weatherCity").value.trim() || currentDestination;
+  openSearch("https://www.google.com/search?q=" + encodeURIComponent(city + " weather forecast"));
+}
+
+function openHotels() {
+  const city = $("hotelCity").value.trim() || currentDestination;
+  openSearch("https://www.google.com/search?q=" + encodeURIComponent("hotels in " + city));
+}
+
+function openTransport(mode) {
+  const from = $("transportFrom").value.trim();
+  const to = $("transportTo").value.trim() || currentDestination;
+
+  if (!to) {
+    alert("Please enter a destination.");
+    return;
+  }
+
+  const query = mode === "car"
+    ? `${from} to ${to} driving directions`
+    : `${mode} from ${from} to ${to}`;
+
+  if (mode === "car") {
+    openSearch("https://www.google.com/maps/dir/" +
+      encodeURIComponent(from) + "/" + encodeURIComponent(to));
+  } else {
+    openSearch("https://www.google.com/search?q=" + encodeURIComponent(query));
+  }
+}
+
+function downloadItinerary() {
+  if (!currentDays.length) {
+    alert("Please generate your trip first.");
+    return;
+  }
+
+  let text = `WanderWise Trip Itinerary\nDestination: ${currentDestination}\n\n`;
+
+  currentDays.forEach((day, index) => {
+    text += `DAY ${index + 1}\n`;
+    day.forEach((place, i) => {
+      text += `${i + 1}. ${place[0]} - ${place[3]}\n${place[1]}\n`;
+      text += `Map: ${mapsUrl(place[0], currentDestination)}\n\n`;
+    });
+  });
+
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "WanderWise-Itinerary.txt";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function changeLanguage(language) {
+  document.documentElement.lang = language;
+
+  document.querySelectorAll("[data-en][data-mr][data-hi]").forEach(element => {
+    element.textContent = element.dataset[language];
+  });
+}
+
+// Language selector
+$("languageSelect").addEventListener("change", event => {
+  changeLanguage(event.target.value);
 });
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeGallery();
+// Dark mode
+$("darkToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const isDark = document.body.classList.contains("dark");
+  $("darkToggle").textContent = isDark ? "☀️" : "🌙";
+  saveStore("wanderwise-dark", isDark);
+});
+
+// Trip generation
+$("tripForm").addEventListener("submit", generateTrip);
+
+// Day-wise tabs
+$("dayTabs").addEventListener("click", event => {
+  const button = event.target.closest("[data-day]");
+  if (!button) return;
+  activeDay = Number(button.dataset.day);
+  renderItinerary();
+});
+
+// Favourite buttons work in itinerary and gallery
+document.addEventListener("click", event => {
+  const favButton = event.target.closest("[data-fav-name]");
+  if (favButton) {
+    toggleFavourite(favButton.dataset.favName, favButton.dataset.favDestination);
+    return;
+  }
+
+  const chooseButton = event.target.closest(".choose-destination");
+  if (chooseButton) {
+    $("destinationInput").value = chooseButton.dataset.destination;
+    $("planner").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  const removeButton = event.target.closest(".remove-fav");
+  if (removeButton) {
+    toggleFavourite(removeButton.dataset.favName, removeButton.dataset.favDestination);
+    return;
+  }
+
+  const deleteButton = event.target.closest("[data-expense-id]");
+  if (deleteButton) {
+    expenses = expenses.filter(item => item.id !== Number(deleteButton.dataset.expenseId));
+    saveStore("wanderwise-expenses", expenses);
+    renderExpenses();
+  }
+});
+
+// Destination search
+$("placeSearch").addEventListener("input", event => renderGallery(event.target.value));
+
+// Map, weather, hotels
+$("mapBtn").addEventListener("click", openMapSearch);
+$("weatherBtn").addEventListener("click", openWeather);
+$("hotelBtn").addEventListener("click", openHotels);
+
+// Transport
+document.querySelectorAll(".transport-btn").forEach(button => {
+  button.addEventListener("click", () => openTransport(button.dataset.mode));
 });
 
 // Budget calculator
-$("#budgetForm").addEventListener("submit", event => {
+$("calculateBudget").addEventListener("click", calculateBudget);
+
+// Expense tracker
+$("expenseForm").addEventListener("submit", event => {
   event.preventDefault();
 
-  const people = Number($("#budgetPeople").value);
-  const days = Number($("#budgetDays").value);
-  const transport = Number($("#transportCost").value);
-  const hotel = Number($("#hotelCost").value);
-  const rooms = Number($("#roomCount").value);
-  const food = Number($("#foodCost").value);
-  const activities = Number($("#activityCost").value);
-  const extras = Number($("#extraCost").value);
+  const name = $("expenseName").value.trim();
+  const amount = Number($("expenseAmount").value);
 
-  const values = [people, days, transport, hotel, rooms, food, activities, extras];
-
-  if (values.some(v => !Number.isFinite(v) || v < 0) ||
-      people < 1 || days < 1 || rooms < 1) {
-    alert("Please enter valid, non-negative costs and positive people, days and rooms.");
+  if (!name || !Number.isFinite(amount) || amount <= 0) {
+    alert("Enter an expense name and a valid amount.");
     return;
   }
 
-  const transportTotal = transport * people;
-  const hotelTotal = hotel * rooms * days;
-  const foodTotal = food * people * days;
-  const activityTotal = activities * people;
-  const grandTotal = transportTotal + hotelTotal + foodTotal + activityTotal + extras;
-
-  $("#budgetResult").innerHTML = `
-    <h3>💰 Your Estimated Trip Budget</h3>
-    <div class="result-line"><span>Transport</span><strong>${money(transportTotal)}</strong></div>
-    <div class="result-line"><span>Accommodation</span><strong>${money(hotelTotal)}</strong></div>
-    <div class="result-line"><span>Food</span><strong>${money(foodTotal)}</strong></div>
-    <div class="result-line"><span>Activities</span><strong>${money(activityTotal)}</strong></div>
-    <div class="result-line"><span>Other expenses</span><strong>${money(extras)}</strong></div>
-    <div class="result-line total-line"><span>Total</span><strong>${money(grandTotal)}</strong></div>
-    <p class="note">Approximate cost per traveller: ${money(grandTotal / people)}. Actual prices may differ.</p>
-  `;
-
-  $("#budgetResult").classList.remove("hidden");
-});
-
-
-// Reviews and star ratings
-let selectedRating = 5;
-let reviews = STORE.get("tripReviews", []);
-if (!Array.isArray(reviews)) reviews = [];
-
-function updateStars() {
-  $$("#starRating button").forEach(button => {
-    const selected = Number(button.dataset.rating) <= selectedRating;
-    button.classList.toggle("selected", selected);
-    button.setAttribute("aria-pressed", String(Number(button.dataset.rating) === selectedRating));
-  });
-}
-
-$("#starRating").addEventListener("click", event => {
-  const button = event.target.closest("[data-rating]");
-  if (!button) return;
-  selectedRating = Number(button.dataset.rating);
-  updateStars();
-});
-
-function renderReviews() {
-  $("#reviewList").innerHTML = reviews.length
-    ? reviews.map(review => `
-      <article class="review-card">
-        <h3>${escapeHTML(review.name)}</h3>
-        <div class="stars" aria-label="${review.rating} out of 5 stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
-        <p>${escapeHTML(review.message)}</p>
-        <small>${escapeHTML(review.date)}</small>
-      </article>
-    `).join("")
-    : '<div class="panel"><p>No reviews yet. You can add the first review!</p></div>';
-
-  STORE.set("tripReviews", reviews);
-}
-
-$("#reviewForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = $("#reviewName").value.trim();
-  const message = $("#reviewMessage").value.trim();
-
-  if (!name || !message) return;
-
-  reviews.unshift({
+  expenses.push({
     id: Date.now(),
     name,
-    rating: selectedRating,
-    message,
-    date: new Date().toLocaleDateString()
+    amount,
+    category: $("expenseCategory").value
   });
 
-  if (!STORE.set("tripReviews", reviews)) {
-    reviews.shift();
-    return;
-  }
-
-  $("#reviewForm").reset();
-  selectedRating = 5;
-  updateStars();
-  renderReviews();
+  saveStore("wanderwise-expenses", expenses);
+  $("expenseForm").reset();
+  renderExpenses();
 });
 
-updateStars();
-renderReviews();
+// Packing checklist
+$("packingList").addEventListener("change", event => {
+  const input = event.target.closest("[data-pack-id]");
+  if (!input) return;
 
-// Live weather search via Open-Meteo (no API key normally required)
-const weatherCodes = {
-  0: ["Clear sky", "☀️"],
-  1: ["Mainly clear", "🌤️"],
-  2: ["Partly cloudy", "⛅"],
-  3: ["Overcast", "☁️"],
-  45: ["Fog", "🌫️"],
-  48: ["Depositing rime fog", "🌫️"],
-  51: ["Light drizzle", "🌦️"],
-  53: ["Drizzle", "🌦️"],
-  55: ["Dense drizzle", "🌧️"],
-  61: ["Light rain", "🌦️"],
-  63: ["Moderate rain", "🌧️"],
-  65: ["Heavy rain", "🌧️"],
-  71: ["Light snowfall", "🌨️"],
-  73: ["Moderate snowfall", "❄️"],
-  75: ["Heavy snowfall", "❄️"],
-  80: ["Rain showers", "🌦️"],
-  81: ["Moderate rain showers", "🌧️"],
-  82: ["Heavy rain showers", "⛈️"],
-  95: ["Thunderstorm", "⛈️"],
-  96: ["Thunderstorm with hail", "⛈️"],
-  99: ["Severe thunderstorm with hail", "⛈️"]
-};
+  const item = packedItems.find(item => item.id === Number(input.dataset.packId));
+  if (item) item.done = input.checked;
+  renderPacking();
+});
 
-$("#weatherForm").addEventListener("submit", async event => {
+$("packingForm").addEventListener("submit", event => {
   event.preventDefault();
+  const name = $("customPacking").value.trim();
+  if (!name) return;
 
-  const city = $("#weatherCity").value.trim();
-  const result = $("#weatherResult");
-
-  result.classList.remove("hidden");
-  result.textContent = "Loading weather information...";
-
-  try {
-    const geoURL = new URL("https://geocoding-api.open-meteo.com/v1/search");
-    geoURL.search = new URLSearchParams({
-      name: city, count: "1", language: "en", format: "json"
-    });
-
-    const geoResponse = await fetch(geoURL);
-    if (!geoResponse.ok) throw new Error("Could not search for this city.");
-
-    const geo = await geoResponse.json();
-    const place = geo.results && geo.results[0];
-
-    if (!place) throw new Error("City not found. Try a different city name.");
-
-    const weatherURL = new URL("https://api.open-meteo.com/v1/forecast");
-    weatherURL.search = new URLSearchParams({
-      latitude: place.latitude,
-      longitude: place.longitude,
-      current: "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m",
-      timezone: "auto"
-    });
-
-    const weatherResponse = await fetch(weatherURL);
-    if (!weatherResponse.ok) throw new Error("Weather service is unavailable.");
-
-    const weather = await weatherResponse.json();
-    const current = weather.current;
-    const code = weatherCodes[current.weather_code] || ["Weather conditions unavailable", "🌍"];
-
-    result.innerHTML = `
-      <div class="weather-icon">${code[1]}</div>
-      <h3>${escapeHTML(place.name)}${place.country ? ", " + escapeHTML(place.country) : ""}</h3>
-      <div class="weather-temp">${Math.round(current.temperature_2m)}°C</div>
-      <p>${escapeHTML(code[0])}</p>
-      <div class="result-line"><span>Feels like</span><strong>${current.apparent_temperature}°C</strong></div>
-      <div class="result-line"><span>Humidity</span><strong>${current.relative_humidity_2m}%</strong></div>
-      <div class="result-line"><span>Wind speed</span><strong>${current.wind_speed_10m} km/h</strong></div>
-      <p class="note">Current weather · ${escapeHTML(current.time.replace("T", " "))} · Local time</p>
-      <p class="note">Source: Open-Meteo. Weather conditions can change.</p>
-    `;
-  } catch (error) {
-    result.textContent = error.message ||
-      "Unable to load weather. Check your internet connection and try again.";
-  }
+  packedItems.push({ id: Date.now(), name, done: false });
+  $("customPacking").value = "";
+  renderPacking();
 });
 
-// Flight, train and bus route search
-$("#routeForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const from = $("#routeFrom").value.trim();
-  const to = $("#routeTo").value.trim();
-
-  if (!from || !to) return;
-
-  const query = `travel from ${from} to ${to}`;
-  const url = "https://www.google.com/maps/dir/" +
-    encodeURIComponent(from) + "/" + encodeURIComponent(to);
-
-  window.open(url, "_blank", "noopener,noreferrer");
+$("resetPacking").addEventListener("click", () => {
+  packedItems.forEach(item => item.done = false);
+  renderPacking();
 });
 
-// Demo contact form
-$("#contactForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const name = $("#contactName").value.trim();
-  $("#contactStatus").textContent =
-    `Thank you, ${name}! The form is validated, but messages are not sent to a server in this demo.`;
-
-  $("#contactForm").reset();
-});
+// Itinerary download and printing
+$("downloadBtn").addEventListener("click", downloadItinerary);
+$("printBtn").addEventListener("click", () => window.print());
 
 // Back-to-top button
 window.addEventListener("scroll", () => {
-  $("#backToTop").classList.toggle("show", window.scrollY > 350);
+  $("topBtn").style.display = window.scrollY > 400 ? "block" : "none";
 });
-
-$("#backToTop").addEventListener("click", () => {
+$("topBtn").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+// Initial setup
+(function init() {
+  const now = new Date();
+  const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+    .toISOString().slice(0, 10);
+  $("startDate").value = localDate;
+  $("transportTo").value = currentDestination;
+  $("weatherCity").value = currentDestination;
+  $("hotelCity").value = currentDestination;
+
+  if (readStore("wanderwise-dark", false)) {
+    document.body.classList.add("dark");
+    $("darkToggle").textContent = "☀️";
+  }
+
+  renderGallery();
+  renderFavourites();
+  renderExpenses();
+  renderPacking();
+  calculateBudget();
+})();
